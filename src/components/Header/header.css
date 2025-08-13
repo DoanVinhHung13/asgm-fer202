@@ -1,0 +1,79 @@
+/* src/components/Layout/Header/Header.css */
+.main-header {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0;
+  height: 64px;
+  line-height: 64px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 100%;
+}
+
+.header-left .logo {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.header-left .logo h2 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.main-menu {
+  border: none;
+  background: transparent;
+}
+
+.main-menu .ant-menu-item {
+  font-weight: 500;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .header-center {
+    display: none;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .header-container {
+    padding: 0 12px;
+  }
+}

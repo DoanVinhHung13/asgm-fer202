@@ -4,6 +4,8 @@ import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import ROUTER from "../../../router/ROUTER";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 const PrivateRoutes = () => {
   const { user, isAuthenticated } = useContext(AuthContext);
@@ -14,11 +16,11 @@ const PrivateRoutes = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {/* <Header /> */}
+      <Header />
       <Layout.Content style={{ padding: "20px" }}>
         <Outlet />
       </Layout.Content>
-      {/* <Footer /> */}
+      <Footer />
     </Layout>
   );
 };

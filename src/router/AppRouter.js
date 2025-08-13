@@ -19,7 +19,7 @@ const PublicRouters = React.lazy(() =>
 // const NotFound = React.lazy(() => import("src/pages/SUPPORTPAGES/NotFound"));
 
 // Anonymous
-// const Home = React.lazy(() => import("src/pages/ANONYMOUS/Home"));
+const Home = React.lazy(() => import("../pages/SUPPORTPAGES/Home"));
 const Login = React.lazy(() => import("../pages/SUPPORTPAGES/Login"));
 
 // const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
@@ -82,14 +82,14 @@ const routes = [
       </LazyLoadingComponent>
     ),
     children: [
-      //   {
-      //     path: ROUTER.HOME,
-      //     element: (
-      //       <LazyLoadingComponent>
-      //         <Home />
-      //       </LazyLoadingComponent>
-      //     ),
-      //   },
+      {
+        path: ROUTER.HOME,
+        element: (
+          <LazyLoadingComponent>
+            <Home />
+          </LazyLoadingComponent>
+        ),
+      },
       {
         path: ROUTER.DANG_NHAP,
         element: (
