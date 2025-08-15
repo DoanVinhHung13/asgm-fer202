@@ -39,19 +39,29 @@
       "id": 1,
       "name": "Áo thời trang",
       "description": "Các loại áo thời trang nam nữ",
-      "status": "active"
+      "status": "active",
+      "image": "/img/shirt.avif"
     },
     {
       "id": 2,
       "name": "Quần thời trang",
       "description": "Các loại quần thời trang nam nữ",
-      "status": "active"
+      "status": "active",
+      "image": "/img/pants.avif"
     },
     {
       "id": 3,
       "name": "Phụ kiện",
       "description": "Phụ kiện thời trang",
-      "status": "active"
+      "status": "active",
+      "image": "/img/accessories.avif"
+    },
+    {
+      "id": 4,
+      "name": "Giày",
+      "description": "Giày thời trang",
+      "status": "active",
+      "image": "/img/AIR+MAX+TL+2.5.avif"
     }
   ],
   "products": [
@@ -63,10 +73,7 @@
       "originalPrice": 250000,
       "categoryId": 1,
       "sellerId": 1,
-      "images": [
-        "https://via.placeholder.com/300x300?text=Ao+Thun+1",
-        "https://via.placeholder.com/300x300?text=Ao+Thun+2"
-      ],
+      "images": ["/img/ao_thun_1.avif"],
       "variants": [
         {
           "id": 1,
@@ -101,7 +108,7 @@
       "originalPrice": 499000,
       "categoryId": 2,
       "sellerId": 1,
-      "images": ["https://via.placeholder.com/300x300?text=Quan+Jeans+1"],
+      "images": ["/img/quan1.avif"],
       "variants": [
         {
           "id": 4,

@@ -5,6 +5,7 @@ import viVN from "antd/locale/vi_VN";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
+import "./index.css";
 import AppRouter from "./router/AppRouter";
 
 // Cấu hình theme cho Ant Design
