@@ -22,6 +22,12 @@ const PublicRouters = React.lazy(() =>
 const Home = React.lazy(() => import("../pages/SUPPORTPAGES/Home"));
 const Login = React.lazy(() => import("../pages/SUPPORTPAGES/Login"));
 
+//Seller
+const SellerDashboard = React.lazy(() => import("../pages/Sellers/SellerDashboard"));
+const ManagerList = React.lazy(() => import("../pages/Sellers/Employee/ManagerList"));
+const CreateManager = React.lazy(() => import("../pages/Sellers/Employee/CreateManager"));
+
+
 // const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
 
 // // Customer
@@ -161,6 +167,30 @@ const routes = [
   //   },
 
   //   // Seller routes
+  {
+      path: "/manager-list",
+      element: (
+        <LazyLoadingComponent>
+          <ManagerList />
+        </LazyLoadingComponent>
+      ),
+    },
+    {
+      path: "/create-manager",
+      element: (
+        <LazyLoadingComponent>
+          <CreateManager />
+        </LazyLoadingComponent>
+      ),
+    },
+    {
+      path: ROUTER.SELLER_DASHBOARD,
+      element: (
+        <LazyLoadingComponent>
+          <SellerDashboard />
+        </LazyLoadingComponent>
+      ),
+    },
   //   {
   //     element: (
   //       <LazyLoadingComponent>
