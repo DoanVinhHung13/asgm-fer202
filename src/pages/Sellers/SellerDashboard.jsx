@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CreateManager from "./CreateManager";
+import CreateManager from "./Employee/CreateManager";
 
 export default function ManagerList() {
   const [managers, setManagers] = useState([]);
@@ -17,7 +17,7 @@ export default function ManagerList() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Bạn có chắc muốn xóa?")) {
-      await fetch(`http://localhost:3000/users/${id}`, { method: "DELETE" });
+      await fetch(`http://localhost:9000/users/${id}`, { method: "DELETE" });
       fetchManagers();
     }
   };
