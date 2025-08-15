@@ -7,6 +7,7 @@ import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
 import AppRouter from "./router/AppRouter";
 
+
 // Cấu hình theme cho Ant Design
 const theme = {
   token: {
@@ -43,6 +44,7 @@ function App() {
         <AuthProvider>
           <div className="App">
             <AppRouter />
+            
           </div>
         </AuthProvider>
       </Router>

@@ -32,6 +32,17 @@
       "address": "789 Đường Admin",
       "status": "active",
       "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "a02f",
+      "name": "aa",
+      "email": "admin@gmail.com",
+      "password": "123456",
+      "phone": "01234567",
+      "address": "aa",
+      "role": "manager",
+      "status": "active",
+      "createdAt": "2025-08-14T18:41:52.620Z"
     }
   ],
   "categories": [
@@ -101,7 +112,9 @@
       "originalPrice": 499000,
       "categoryId": 2,
       "sellerId": 1,
-      "images": ["https://via.placeholder.com/300x300?text=Quan+Jeans+1"],
+      "images": [
+        "https://via.placeholder.com/300x300?text=Quan+Jeans+1"
+      ],
       "variants": [
         {
           "id": 4,
