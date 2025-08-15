@@ -7,63 +7,41 @@ import ROUTER from "./ROUTER";
 const PublicRouters = React.lazy(() =>
   import("../pages/SUPPORTPAGES/PublicRouters")
 );
-// const PrivateRoutes = React.lazy(() =>
-//   import("src/pages/SUPPORTPAGES/PrivateRoutes.jsx")
-// );
-// const SellerRoutes = React.lazy(() =>
-//   import("src/pages/SUPPORTPAGES/SellerRoutes")
-// );
-// const AdminRoutes = React.lazy(() =>
-//   import("src/pages/SUPPORTPAGES/AdminRoutes")
-// );
-// const NotFound = React.lazy(() => import("src/pages/SUPPORTPAGES/NotFound"));
 
 // Anonymous
 const Home = React.lazy(() => import("../pages/SUPPORTPAGES/Home"));
 const Login = React.lazy(() => import("../pages/SUPPORTPAGES/Login"));
 
-//Seller
-const SellerDashboard = React.lazy(() => import("../pages/Sellers/SellerDashboard"));
-const ManagerList = React.lazy(() => import("../pages/Sellers/Employee/ManagerList"));
-const CreateManager = React.lazy(() => import("../pages/Sellers/Employee/CreateManager"));
-
-
-// const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
-
-// // Customer
-// const ProductList = React.lazy(() => import("src/pages/CUSTOMER/ProductList"));
+// Product Pages
+const ProductListing = React.lazy(() =>
+  import("../pages/User/Products/ProductListing")
+);
 // const ProductDetail = React.lazy(() =>
-//   import("src/pages/CUSTOMER/ProductDetail")
+//   import("../pages/Products/ProductDetail")
 // );
-// const Cart = React.lazy(() => import("src/pages/CUSTOMER/Cart"));
-// const Checkout = React.lazy(() => import("src/pages/CUSTOMER/Checkout"));
-// const MyOrders = React.lazy(() => import("src/pages/CUSTOMER/MyOrders"));
+// const SearchResults = React.lazy(() =>
+//   import("../pages/Products/SearchResults")
+// );
+
+// // Shopping Pages
+// const Cart = React.lazy(() => import("../pages/Shopping/Cart"));
+// const Checkout = React.lazy(() => import("../pages/Shopping/Checkout"));
+// const Favorites = React.lazy(() => import("../pages/Shopping/Favorites"));
+
+// // User Pages
+// const Profile = React.lazy(() => import("../pages/User/Profile"));
+// const Orders = React.lazy(() => import("../pages/User/Orders"));
 
 // Seller
-// const SellerDashboard = React.lazy(() => import("src/pages/SELLER/Dashboard"));
-// const ProductManagement = React.lazy(() =>
-//   import("src/pages/SELLER/ProductManagement")
-// );
-// const AddProduct = React.lazy(() => import("src/pages/SELLER/AddProduct"));
-// const EditProduct = React.lazy(() => import("src/pages/SELLER/EditProduct"));
-// const OrderManagement = React.lazy(() =>
-//   import("src/pages/SELLER/OrderManagement")
-// );
-// const OrderDetail = React.lazy(() => import("src/pages/SELLER/OrderDetail"));
-// const VoucherManagement = React.lazy(() =>
-//   import("src/pages/SELLER/VoucherManagement")
-// );
-// const AddVoucher = React.lazy(() => import("src/pages/SELLER/AddVoucher"));
-// const Reports = React.lazy(() => import("src/pages/SELLER/Reports"));
-
-// // Admin
-// const AdminDashboard = React.lazy(() => import("src/pages/ADMIN/Dashboard"));
-// const UserManagement = React.lazy(() =>
-//   import("src/pages/ADMIN/UserManagement")
-// );
-// const SellerManagement = React.lazy(() =>
-//   import("src/pages/ADMIN/SellerManagement")
-// );
+const SellerDashboard = React.lazy(() =>
+  import("../pages/Sellers/SellerDashboard")
+);
+const ManagerList = React.lazy(() =>
+  import("../pages/Sellers/Employee/ManagerList")
+);
+const CreateManager = React.lazy(() =>
+  import("../pages/Sellers/Employee/CreateManager")
+);
 
 function LazyLoadingComponent({ children }) {
   return (
@@ -104,218 +82,140 @@ const routes = [
           </LazyLoadingComponent>
         ),
       },
-      //   {
-      //     path: ROUTER.DANG_KY,
-      //     element: (
-      //       <LazyLoadingComponent>
-      //         <Register />
-      //       </LazyLoadingComponent>
-      //     ),
-      //   },
-      //   {
-      //     path: ROUTER.SAN_PHAM,
-      //     element: (
-      //       <LazyLoadingComponent>
-      //         <ProductList />
-      //       </LazyLoadingComponent>
-      //     ),
-      //   },
-      //   {
-      //     path: ROUTER.CHI_TIET_SAN_PHAM,
-      //     element: (
-      //       <LazyLoadingComponent>
-      //         <ProductDetail />
-      //       </LazyLoadingComponent>
-      //     ),
-      //   },
+
+      // Product Category Routes - All use the same ProductListing component
+      {
+        path: ROUTER.QUAN,
+        element: (
+          <LazyLoadingComponent>
+            <ProductListing />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.AO,
+        element: (
+          <LazyLoadingComponent>
+            <ProductListing />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.GIAY,
+        element: (
+          <LazyLoadingComponent>
+            <ProductListing />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.PHU_KIEN,
+        element: (
+          <LazyLoadingComponent>
+            <ProductListing />
+          </LazyLoadingComponent>
+        ),
+      },
+
+      // // Product Detail Route
+      // {
+      //   path: ROUTER.CHI_TIET_SAN_PHAM,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <ProductDetail />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
+
+      // // Search Route
+      // {
+      //   path: ROUTER.TIM_KIEM,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <SearchResults />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
+
+      // // Shopping Routes (require authentication)
+      // {
+      //   path: ROUTER.GIO_HANG,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <Cart />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
+      // {
+      //   path: ROUTER.THANH_TOAN,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <Checkout />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
+      // {
+      //   path: ROUTER.YEU_THICH,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <Favorites />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
+
+      // // User Routes
+      // {
+      //   path: ROUTER.PROFILE,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <Profile />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
+      // {
+      //   path: ROUTER.ORDERS,
+      //   element: (
+      //     <LazyLoadingComponent>
+      //       <Orders />
+      //     </LazyLoadingComponent>
+      //   ),
+      // },
     ],
   },
 
-  // Customer routes
-  //   {
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <PrivateRoutes />
-  //       </LazyLoadingComponent>
-  //     ),
-  //     children: [
-  //       {
-  //         path: ROUTER.GIO_HANG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <Cart />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.THANH_TOAN,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <Checkout />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.DON_HANG_CUA_TOI,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <MyOrders />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //     ],
-  //   },
-
-  //   // Seller routes
+  // Seller routes
   {
-      path: "/manager-list",
-      element: (
-        <LazyLoadingComponent>
-          <ManagerList />
-        </LazyLoadingComponent>
-      ),
-    },
-    {
-      path: "/create-manager",
-      element: (
-        <LazyLoadingComponent>
-          <CreateManager />
-        </LazyLoadingComponent>
-      ),
-    },
-    {
-      path: ROUTER.SELLER_DASHBOARD,
-      element: (
-        <LazyLoadingComponent>
-          <SellerDashboard />
-        </LazyLoadingComponent>
-      ),
-    },
-  //   {
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <SellerRoutes />
-  //       </LazyLoadingComponent>
-  //     ),
-  //     children: [
-  //       {
-  //         path: ROUTER.SELLER_DASHBOARD,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <SellerDashboard />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_SAN_PHAM,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <ProductManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.THEM_SAN_PHAM,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <AddProduct />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.SUA_SAN_PHAM,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <EditProduct />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_DON_HANG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <OrderManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.CHI_TIET_DON_HANG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <OrderDetail />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_VOUCHER,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <VoucherManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.THEM_VOUCHER,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <AddVoucher />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.BAO_CAO,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <Reports />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //     ],
-  //   },
-
-  // Admin routes
-  //   {
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <AdminRoutes />
-  //       </LazyLoadingComponent>
-  //     ),
-  //     children: [
-  //       {
-  //         path: ROUTER.ADMIN_DASHBOARD,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <AdminDashboard />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_NGUOI_DUNG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <UserManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_SELLER,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <SellerManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     path: "*",
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <NotFound />
-  //       </LazyLoadingComponent>
-  //     ),
-  //   },
+    path: "/manager-list",
+    element: (
+      <LazyLoadingComponent>
+        <ManagerList />
+      </LazyLoadingComponent>
+    ),
+  },
+  {
+    path: "/create-manager",
+    element: (
+      <LazyLoadingComponent>
+        <CreateManager />
+      </LazyLoadingComponent>
+    ),
+  },
+  {
+    path: ROUTER.SELLER_DASHBOARD,
+    element: (
+      <LazyLoadingComponent>
+        <SellerDashboard />
+      </LazyLoadingComponent>
+    ),
+  },
+  {
+    path: ROUTER.MY_SHOP,
+    element: (
+      <LazyLoadingComponent>
+        <SellerDashboard />
+      </LazyLoadingComponent>
+    ),
+  },
 ];
 
 const AppRouter = () => {

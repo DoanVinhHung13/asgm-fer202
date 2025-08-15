@@ -1,36 +1,41 @@
 import { Carousel } from "antd";
-
+import { useNavigate } from "react-router-dom";
 import "./HeroSection.css";
 
 const HeroSection = () => {
-  // Default slides if no heroData is provided
+  const navigate = useNavigate();
+
+  // Default slides with Vietnamese content
   const defaultSlides = [
     {
       id: 1,
-      title: "Unleash Your Style",
-      subtitle: "Trendy Fashion Starts Here",
+      title: "Thể Hiện Phong Cách Của Bạn",
+      subtitle: "Thời Trang Xu Hướng Bắt Đầu Từ Đây",
       description:
-        "Discover the latest trends and express your unique personality with our curated collection",
+        "Khám phá những xu hướng mới nhất và thể hiện cá tính độc đáo của bạn với bộ sưu tập được tuyển chọn",
       image: "/img/LP_NIKE_FOOTBALL_KV.webp",
-      cta: "Shop New Arrivals",
+      cta: "Mua Sắm Hàng Mới",
+      ctaPath: "/new-arrivals",
     },
     {
       id: 2,
-      title: "Bold & Beautiful",
-      subtitle: "Fashion for the Fearless",
+      title: "Táo Bạo & Quyến Rũ",
+      subtitle: "Thời Trang Cho Người Dũng Cảm",
       description:
-        "Step into confidence with pieces designed for those who dare to stand out",
+        "Bước vào sự tự tin với những món đồ được thiết kế cho những ai dám nổi bật",
       image: "/img/LP_NIKE_TRAIN_KV.webp",
-      cta: "Explore Collection",
+      cta: "Khám Phá Bộ Sưu Tập",
+      ctaPath: "/collections",
     },
     {
       id: 3,
-      title: "Summer Vibes",
-      subtitle: "Fresh Looks for Every Day",
+      title: "Không Khí Mùa Hè",
+      subtitle: "Phong Cách Tươi Mới Cho Mọi Ngày",
       description:
-        "Light, breezy, and effortlessly chic - perfect for the season ahead",
+        "Nhẹ nhàng, thoáng mát và thanh lịch một cách tự nhiên - hoàn hảo cho mùa sắp tới",
       image: "/img/LP_NIKE_RUNNING_KV.webp",
-      cta: "Shop Summer",
+      cta: "Mua Sắm Mùa Hè",
+      ctaPath: "/summer-collection",
     },
   ];
 
@@ -46,6 +51,9 @@ const HeroSection = () => {
 
   const handleCTAClick = (slide) => {
     console.log("CTA clicked for:", slide);
+    if (slide.ctaPath) {
+      navigate(slide.ctaPath);
+    }
   };
 
   return (
@@ -75,7 +83,6 @@ const HeroSection = () => {
                   zIndex: 0,
                 }}
               />
-
               <div className="hero-overlay"></div>
               <div className="hero-content">
                 <div className="hero-text">
