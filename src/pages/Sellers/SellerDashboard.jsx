@@ -1,88 +1,150 @@
-import React, { useEffect, useState } from "react";
-import CreateManager from "./Employee/CreateManager";
+import React, { useState } from "react";
+import {
+  ShoppingCartOutlined,
+  InboxOutlined,
+  GiftOutlined,
+  TeamOutlined,
+  BarChartOutlined,
+  SettingOutlined,
+  MenuOutlined,
+  CloseOutlined,
+  BellOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import "./SellerDashboard.css";
+import ManagerList from "./Employee/ManagerList";
 
-export default function ManagerList() {
-  const [managers, setManagers] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+const SellerDashboard = () => {
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const fetchManagers = async () => {
-    const res = await fetch("http://localhost:3000/users?role=manager");
-    const data = await res.json();
-    setManagers(data);
-  };
+  const menuItems = [
+    { id: "dashboard", label: "Dashboard", icon: <BarChartOutlined /> },
+    { id: "orders", label: "Quản lý Đơn hàng", icon: <ShoppingCartOutlined /> },
+    { id: "products", label: "Tạo Sản phẩm", icon: <InboxOutlined /> },
+    { id: "vouchers", label: "Tạo Voucher", icon: <GiftOutlined /> },
+    { id: "employees", label: "Tạo Nhân viên", icon: <TeamOutlined /> },
+    { id: "settings", label: "Cài đặt", icon: <SettingOutlined /> },
+  ];
 
-  useEffect(() => {
-    fetchManagers();
-  }, []);
+  const renderContent = () => {
+    switch (activeTab) {
+      case "dashboard":
+        return (
+          <div className="dashboard-grid">
+            <div className="dashboard-card">
+              <div className="dashboard-icon blue">
+                <ShoppingCartOutlined />
+              </div>
+              <div>
+                <p className="label">Tổng đơn hàng</p>
+                <p className="value">1,234</p>
+              </div>
+            </div>
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Bạn có chắc muốn xóa?")) {
-      await fetch(`http://localhost:9000/users/${id}`, { method: "DELETE" });
-      fetchManagers();
+            <div className="dashboard-card">
+              <div className="dashboard-icon green">
+                <InboxOutlined />
+              </div>
+              <div>
+                <p className="label">Sản phẩm</p>
+                <p className="value">456</p>
+              </div>
+            </div>
+
+            <div className="dashboard-card">
+              <div className="dashboard-icon purple">
+                <GiftOutlined />
+              </div>
+              <div>
+                <p className="label">Voucher</p>
+                <p className="value">23</p>
+              </div>
+            </div>
+
+            <div className="dashboard-card">
+              <div className="dashboard-icon orange">
+                <TeamOutlined />
+              </div>
+              <div>
+                <p className="label">Nhân viên</p>
+                <p className="value">12</p>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "orders":
+        return <div className="content-box">Quản lý Đơn hàng</div>;
+      case "products":
+        return <div className="content-box">Tạo Sản phẩm</div>;
+      case "vouchers":
+        return <div className="content-box">Tạo Voucher</div>;
+      case "employees":
+        return <ManagerList />;
+      case "settings":
+        return <div className="content-box">Cài đặt</div>;
+      default:
+        return null;
     }
   };
 
   return (
-    <div style={{ maxWidth: 800, margin: "auto" }}>
-      <h2>Danh sách nhân viên</h2>
-      <button onClick={() => setShowModal(true)}>+ Thêm nhân viên</button>
-
-      {showModal && (
-        <div style={overlayStyle}>
-          <div style={modalStyle}>
-            <button onClick={() => setShowModal(false)}>❌</button>
-            <CreateManager
-              onSuccess={() => {
-                setShowModal(false);
-                fetchManagers();
-              }}
-            />
-          </div>
+    <div className="dashboard-container">
+      {/* Sidebar */}
+      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <h1>Seller Panel</h1>
+          <button className="icon-btn" onClick={() => setSidebarOpen(false)}>
+            <CloseOutlined />
+          </button>
         </div>
-      )}
 
-      <table border="1" cellPadding="10" width="100%">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Email</th>
-            <th>Điện thoại</th>
-            <th>Địa chỉ</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          {managers.map((m) => (
-            <tr key={m.id}>
-              <td>{m.id}</td>
-              <td>{m.name}</td>
-              <td>{m.email}</td>
-              <td>{m.phone}</td>
-              <td>{m.address}</td>
-              <td>
-                <button onClick={() => handleDelete(m.id)}>Xóa</button>
-              </td>
-            </tr>
+        <nav>
+          {menuItems.map((item) => (
+            <button
+              key={item.id}
+              className={`sidebar-btn ${activeTab === item.id ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab(item.id);
+                setSidebarOpen(false);
+              }}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
           ))}
-        </tbody>
-      </table>
+        </nav>
+      </aside>
+
+      {/* Main */}
+      <main className="main-content">
+        <header className="main-header">
+          <button
+            className="icon-btn lg-hidden"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <MenuOutlined />
+          </button>
+          <h2>
+            {menuItems.find((item) => item.id === activeTab)?.label ||
+              "Dashboard"}
+          </h2>
+          <div className="header-actions">
+            <button className="icon-btn">
+              <BellOutlined />
+            </button>
+            <button className="user-btn">
+              <UserOutlined />
+              <span>Admin</span>
+            </button>
+          </div>
+        </header>
+
+        <section className="main-section">{renderContent()}</section>
+      </main>
     </div>
   );
-}
-
-const overlayStyle = {
-  position: "fixed",
-  top: 0, left: 0, right: 0, bottom: 0,
-  backgroundColor: "rgba(0,0,0,0.5)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center"
 };
 
-const modalStyle = {
-  background: "#fff",
-  padding: "20px",
-  borderRadius: "8px",
-  width: "400px"
-};
+export default SellerDashboard;
