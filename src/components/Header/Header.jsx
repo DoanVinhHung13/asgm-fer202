@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext"; // Adjust path as needed
 import ROUTER from "../../router/ROUTER";
-import "./header.css";
+import "./Header.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,11 +15,11 @@ const Header = () => {
   const navigate = useNavigate();
 
   const navItems = [
-    { key: "new", label: "New Arrivals" },
-    { key: "women", label: "Women" },
-    { key: "men", label: "Men" },
-    { key: "accessories", label: "Accessories" },
-    { key: "sale", label: "Sale" },
+    { key: "new", label: "Bộ sưu tập mới", path: "/bo-suu-tap" },
+    { key: "women", label: "Áo", path: "/ao-thun" },
+    { key: "men", label: "Quần", path: "/quan" },
+    { key: "accessories", label: "Phụ kiện", path: "/phu-kien" },
+    { key: "shoes", label: "Giày", path: "/giay" },
   ];
 
   // User menu items based on role
@@ -27,43 +27,61 @@ const Header = () => {
     if (!user) return [];
 
     const baseItems = [
-      { key: "profile", label: "My Profile" },
-      { key: "orders", label: "My Orders" },
+      { key: "profile", label: "Hồ sơ của tôi", path: "/ho-so" },
+      { key: "orders", label: "Đơn hàng của tôi", path: "/don-hang" },
     ];
 
     if (user.role === "seller") {
-      baseItems.splice(1, 0, { key: "shop", label: "My Shop" });
+      baseItems.splice(1, 0, {
+        key: "shop",
+        label: "My Shop",
+        path: "/my-shop",
+      });
     }
 
-    baseItems.push({ key: "logout", label: "Logout" });
+    baseItems.push({ key: "logout", label: "Đăng xuất", path: null });
     return baseItems;
   };
 
-  const handleMenuClick = (key) => {
-    console.log("Menu clicked:", key);
+  const handleMenuClick = (item) => {
+    console.log("Menu clicked:", item.key);
+    if (item.path) {
+      navigate(item.path);
+    }
     setIsMenuOpen(false);
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Search:", searchQuery);
+    if (searchQuery.trim()) {
+      console.log("Search:", searchQuery);
+      // Navigate to search results page with query
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   const handleUserMenuClick = ({ key }) => {
     setIsUserDropdownOpen(false);
+    const menuItem = getUserMenuItems().find((item) => item.key === key);
 
     switch (key) {
       case "profile":
+        navigate("/profile");
         break;
       case "orders":
+        navigate("/orders");
         break;
       case "shop":
+        navigate("/my-shop");
         break;
       case "logout":
         logout();
         navigate(ROUTER.HOME);
         break;
       default:
+        if (menuItem && menuItem.path) {
+          navigate(menuItem.path);
+        }
         break;
     }
   };
@@ -74,6 +92,24 @@ const Header = () => {
 
   const handleRegisterClick = () => {
     navigate(ROUTER.DANG_KY);
+  };
+
+  const handleFavoritesClick = () => {
+    if (user) {
+      navigate("/favorites");
+    } else {
+      // Redirect to login if not authenticated
+      navigate("/dang-nhap");
+    }
+  };
+
+  const handleCartClick = () => {
+    if (user) {
+      navigate("/cart");
+    } else {
+      // Redirect to login if not authenticated
+      navigate("/dang-nhap");
+    }
   };
 
   const userMenu = (
@@ -104,7 +140,7 @@ const Header = () => {
                 key={item.key}
                 type="text"
                 className="nav-button"
-                onClick={() => handleMenuClick(item.key)}
+                onClick={() => handleMenuClick(item)}
               >
                 {item.label}
               </Button>
@@ -126,7 +162,12 @@ const Header = () => {
           {/* Action Icons */}
           <div className="action-icons">
             {/* Favorites */}
-            <Button type="text" className="action-button">
+            <Button
+              type="text"
+              className="action-button"
+              onClick={handleFavoritesClick}
+              title="Favorites"
+            >
               <Heart className="icon" />
             </Button>
 
@@ -139,19 +180,26 @@ const Header = () => {
                   open={isUserDropdownOpen}
                   onOpenChange={setIsUserDropdownOpen}
                 >
-                  <Button type="text" className="action-button">
+                  <Button
+                    type="text"
+                    className="action-button"
+                    title="User Menu"
+                  >
                     <User className="icon" />
                   </Button>
                 </Dropdown>
                 {/* Shopping Cart */}
-                <Button type="text" className="action-button cart-button">
+                <Button
+                  type="text"
+                  className="action-button cart-button"
+                  onClick={handleCartClick}
+                  title="Shopping Cart"
+                >
                   <ShoppingBag className="icon" />
                   <span className="cart-badge">3</span>
                 </Button>
               </div>
             ) : (
-              // Logged in - Show user dropdown
-
               // Not logged in - Show login/register buttons
               <div className="auth-buttons">
                 <Button
@@ -222,7 +270,7 @@ const Header = () => {
                     key={item.key}
                     type="text"
                     className="mobile-nav-button"
-                    onClick={() => handleMenuClick(item.key)}
+                    onClick={() => handleMenuClick(item)}
                   >
                     {item.label}
                   </Button>
@@ -231,7 +279,11 @@ const Header = () => {
 
               {/* Mobile User Actions */}
               <div className="mobile-user-actions">
-                <Button type="text" className="mobile-action-button">
+                <Button
+                  type="text"
+                  className="mobile-action-button"
+                  onClick={handleFavoritesClick}
+                >
                   <Heart className="icon" />
                   Favorites
                 </Button>
@@ -250,6 +302,16 @@ const Header = () => {
                         {item.label}
                       </Button>
                     ))}
+                    {/* Mobile Cart Button */}
+                    <Button
+                      type="text"
+                      className="mobile-action-button"
+                      onClick={handleCartClick}
+                    >
+                      <ShoppingBag className="icon" />
+                      Shopping Cart
+                      <span className="cart-badge">3</span>
+                    </Button>
                   </>
                 ) : (
                   // Not logged in mobile view
