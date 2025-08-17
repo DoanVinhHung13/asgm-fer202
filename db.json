@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "seller@example.com",
       "password": "123456",
       "role": "seller",
@@ -12,7 +12,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "customer@example.com",
       "password": "123456",
       "role": "customer",
@@ -23,7 +23,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "admin@example.com",
       "password": "admin123",
       "role": "admin",
@@ -34,41 +34,52 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": "a02f",
-      "name": "aa",
+      "id": "4",
+      "name": "a",
       "email": "admin@gmail.com",
       "password": "123456",
       "phone": "01234567",
-      "address": "aa",
-      "role": "manager",
+      "address": "vs",
       "status": "active",
-      "createdAt": "2025-08-14T18:41:52.620Z"
+      "role": "seller",
+      "createdAt": "2025-08-17T05:22:29.137Z"
+    },
+    {
+      "id": "5",
+      "name": "Phạm Văn Chiêu",
+      "email": "admin@gmail.com",
+      "password": "123456",
+      "phone": "01234567",
+      "address": "vd",
+      "status": "active",
+      "role": "seller",
+      "createdAt": "2025-08-17T05:24:54.801Z"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Áo thời trang",
       "description": "Các loại áo thời trang nam nữ",
       "status": "active",
       "image": "/img/shirt.avif"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Quần thời trang",
       "description": "Các loại quần thời trang nam nữ",
       "status": "active",
       "image": "/img/pants.avif"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Phụ kiện",
       "description": "Phụ kiện thời trang",
       "status": "active",
       "image": "/img/accessories.avif"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Giày",
       "description": "Giày thời trang",
       "status": "active",
@@ -77,14 +88,16 @@
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Áo thun nam basic",
       "description": "Áo thun nam chất liệu cotton 100%",
       "price": 199000,
       "originalPrice": 250000,
       "categoryId": 1,
       "sellerId": 1,
-      "images": ["/img/ao_thun_1.avif"],
+      "images": [
+        "/img/ao_thun_1.avif"
+      ],
       "variants": [
         {
           "id": 1,
@@ -112,14 +125,16 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Quần jeans nữ",
       "description": "Quần jeans nữ dáng slim fit",
       "price": 399000,
       "originalPrice": 499000,
       "categoryId": 2,
       "sellerId": 1,
-      "images": ["/img/quan1.avif"],
+      "images": [
+        "/img/quan1.avif"
+      ],
       "variants": [
         {
           "id": 4,
@@ -142,7 +157,7 @@
   ],
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "customerId": 2,
       "sellerId": 1,
       "orderCode": "ORD001",
@@ -171,7 +186,7 @@
       "updatedAt": "2024-01-15T10:30:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "customerId": 2,
       "sellerId": 1,
       "orderCode": "ORD002",
@@ -202,7 +217,7 @@
   ],
   "vouchers": [
     {
-      "id": 1,
+      "id": "1",
       "code": "WELCOME50",
       "name": "Voucher chào mừng",
       "description": "Giảm 50k cho đơn hàng từ 300k",
@@ -219,7 +234,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "code": "SALE20",
       "name": "Giảm 20%",
       "description": "Giảm 20% tối đa 100k",
@@ -238,7 +253,7 @@
   ],
   "cart": [
     {
-      "id": 1,
+      "id": "1",
       "customerId": 2,
       "productId": 1,
       "variantId": 1,

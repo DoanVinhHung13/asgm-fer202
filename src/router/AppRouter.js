@@ -23,10 +23,15 @@ const Home = React.lazy(() => import("../pages/SUPPORTPAGES/Home"));
 const Login = React.lazy(() => import("../pages/SUPPORTPAGES/Login"));
 
 //Seller
-const SellerDashboard = React.lazy(() => import("../pages/Sellers/SellerDashboard"));
-const ManagerList = React.lazy(() => import("../pages/Sellers/Employee/ManagerList"));
-const CreateManager = React.lazy(() => import("../pages/Sellers/Employee/CreateManager"));
-
+const SellerDashboard = React.lazy(() =>
+  import("../pages/Sellers/SellerDashboard")
+);
+const ManagerList = React.lazy(() =>
+  import("../pages/Sellers/Employee/ManagerList")
+);
+const CreateManager = React.lazy(() =>
+  import("../pages/Sellers/Employee/CreateManager")
+);
 
 // const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
 
@@ -168,7 +173,19 @@ const routes = [
 
   //   // Seller routes
   {
-      path: "/manager-list",
+    path: "/seller",
+    element: (
+      <LazyLoadingComponent>
+        <SellerDashboard />
+      </LazyLoadingComponent>
+    ),
+    children: [
+      {
+        path: "dashboard",
+        element: <div className="content-box">Đây là trang Dashboard</div>,
+      },
+      {
+      path: "tao-nhan-vien",   
       element: (
         <LazyLoadingComponent>
           <ManagerList />
@@ -176,21 +193,32 @@ const routes = [
       ),
     },
     {
-      path: "/create-manager",
+      path: "tao-nhan-vien/create", 
       element: (
         <LazyLoadingComponent>
           <CreateManager />
         </LazyLoadingComponent>
       ),
     },
-    {
-      path: ROUTER.SELLER_DASHBOARD,
-      element: (
-        <LazyLoadingComponent>
-          <SellerDashboard />
-        </LazyLoadingComponent>
-      ),
-    },
+      {
+        path: "quan-ly-don-hang",
+        element: <div className="content-box">Quản lý Đơn hàng</div>,
+      },
+      {
+        path: "tao-san-pham",
+        element: <div className="content-box">Tạo Sản phẩm</div>,
+      },
+      {
+        path: "tao-voucher",
+        element: <div className="content-box">Tạo Voucher</div>,
+      },
+      {
+        path: "cai-dat",
+        element: <div className="content-box">Cài đặt</div>,
+      },
+    ],
+  },
+
   //   {
   //     element: (
   //       <LazyLoadingComponent>

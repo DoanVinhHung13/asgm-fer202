@@ -11,83 +11,22 @@ import {
   BellOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import "./SellerDashboard.css";
-import ManagerList from "./Employee/ManagerList";
 
 const SellerDashboard = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const navigate = useNavigate();
+  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: <BarChartOutlined /> },
-    { id: "orders", label: "Quản lý Đơn hàng", icon: <ShoppingCartOutlined /> },
-    { id: "products", label: "Tạo Sản phẩm", icon: <InboxOutlined /> },
-    { id: "vouchers", label: "Tạo Voucher", icon: <GiftOutlined /> },
-    { id: "employees", label: "Tạo Nhân viên", icon: <TeamOutlined /> },
-    { id: "settings", label: "Cài đặt", icon: <SettingOutlined /> },
+    { id: "dashboard", label: "Dashboard", icon: <BarChartOutlined />, path: "/seller/dashboard" },
+    { id: "orders", label: "Quản lý Đơn hàng", icon: <ShoppingCartOutlined />, path: "/seller/quan-ly-don-hang" },
+    { id: "products", label: "Tạo Sản phẩm", icon: <InboxOutlined />, path: "/seller/tao-san-pham" },
+    { id: "vouchers", label: "Tạo Voucher", icon: <GiftOutlined />, path: "/seller/tao-voucher" },
+    { id: "employees", label: "Tạo Nhân viên", icon: <TeamOutlined />, path: "/seller/tao-nhan-vien" },
+    { id: "settings", label: "Cài đặt", icon: <SettingOutlined />, path: "/seller/cai-dat" },
   ];
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case "dashboard":
-        return (
-          <div className="dashboard-grid">
-            <div className="dashboard-card">
-              <div className="dashboard-icon blue">
-                <ShoppingCartOutlined />
-              </div>
-              <div>
-                <p className="label">Tổng đơn hàng</p>
-                <p className="value">1,234</p>
-              </div>
-            </div>
-
-            <div className="dashboard-card">
-              <div className="dashboard-icon green">
-                <InboxOutlined />
-              </div>
-              <div>
-                <p className="label">Sản phẩm</p>
-                <p className="value">456</p>
-              </div>
-            </div>
-
-            <div className="dashboard-card">
-              <div className="dashboard-icon purple">
-                <GiftOutlined />
-              </div>
-              <div>
-                <p className="label">Voucher</p>
-                <p className="value">23</p>
-              </div>
-            </div>
-
-            <div className="dashboard-card">
-              <div className="dashboard-icon orange">
-                <TeamOutlined />
-              </div>
-              <div>
-                <p className="label">Nhân viên</p>
-                <p className="value">12</p>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "orders":
-        return <div className="content-box">Quản lý Đơn hàng</div>;
-      case "products":
-        return <div className="content-box">Tạo Sản phẩm</div>;
-      case "vouchers":
-        return <div className="content-box">Tạo Voucher</div>;
-      case "employees":
-        return <ManagerList />;
-      case "settings":
-        return <div className="content-box">Cài đặt</div>;
-      default:
-        return null;
-    }
-  };
 
   return (
     <div className="dashboard-container">
@@ -104,9 +43,9 @@ const SellerDashboard = () => {
           {menuItems.map((item) => (
             <button
               key={item.id}
-              className={`sidebar-btn ${activeTab === item.id ? "active" : ""}`}
+              className={`sidebar-btn ${location.pathname === item.path ? "active" : ""}`}
               onClick={() => {
-                setActiveTab(item.id);
+                navigate(item.path);
                 setSidebarOpen(false);
               }}
             >
@@ -127,8 +66,7 @@ const SellerDashboard = () => {
             <MenuOutlined />
           </button>
           <h2>
-            {menuItems.find((item) => item.id === activeTab)?.label ||
-              "Dashboard"}
+            {menuItems.find((item) => location.pathname === item.path)?.label || "Dashboard"}
           </h2>
           <div className="header-actions">
             <button className="icon-btn">
@@ -141,7 +79,9 @@ const SellerDashboard = () => {
           </div>
         </header>
 
-        <section className="main-section">{renderContent()}</section>
+        <section className="main-section">
+          <Outlet />
+        </section>
       </main>
     </div>
   );
