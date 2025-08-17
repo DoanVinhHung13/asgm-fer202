@@ -12,16 +12,15 @@ const ManagerList = () => {
     password: '',
     phone: '',
     address: '',
-    status: 'active' // Luôn mặc định là active
+    status: 'active'
   });
 
-  // Fetch employees from API
+  // Fetch employees
   const fetchEmployees = async () => {
     setLoading(true);
     try {
       const response = await fetch('http://localhost:9000/users');
       const data = await response.json();
-      // Filter only sellers
       const sellers = data.filter(user => user.role === 'seller');
       setEmployees(sellers);
     } catch (error) {
@@ -39,35 +38,28 @@ const ManagerList = () => {
   // Create employee
   const createEmployee = async (employeeData) => {
     try {
-      // Lấy tất cả users để tìm ID cao nhất
       const allUsersResponse = await fetch('http://localhost:9000/users');
       const allUsers = await allUsersResponse.json();
-      
-      // Tìm ID cao nhất trong tất cả users (chỉ tính các ID số)
-      const generateNextId = () => {
-        const numericIds = allUsers
-          .map(user => parseInt(user.id))
-          .filter(id => !isNaN(id)); // Lọc bỏ các ID không phải số như "04c9"
-        
-        if (numericIds.length === 0) return "1";
-        
-        const maxId = Math.max(...numericIds);
-        return (maxId + 1).toString(); // Trả về string để match với cấu trúc database
-      };
+
+      const numericIds = allUsers
+        .map(user => parseInt(user.id))
+        .filter(id => !isNaN(id));
+
+      const newId = numericIds.length === 0
+        ? "1"
+        : (Math.max(...numericIds) + 1).toString();
 
       const response = await fetch('http://localhost:9000/users', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          id: generateNextId(),
+          id: newId,
           ...employeeData,
           role: 'seller',
           createdAt: new Date().toISOString()
         })
       });
-      
+
       if (response.ok) {
         fetchEmployees();
         alert('Thêm nhân viên thành công!');
@@ -80,17 +72,15 @@ const ManagerList = () => {
     }
   };
 
-  // Update employee
+  // Update employee (PATCH thay vì PUT)
   const updateEmployee = async (id, employeeData) => {
     try {
       const response = await fetch(`http://localhost:9000/users/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(employeeData)
       });
-      
+
       if (response.ok) {
         fetchEmployees();
         alert('Cập nhật nhân viên thành công!');
@@ -105,15 +95,13 @@ const ManagerList = () => {
 
   // Delete employee
   const deleteEmployee = async (id) => {
-    if (!window.confirm('Bạn có chắc chắn muốn xóa nhân viên này?')) {
-      return;
-    }
+    if (!window.confirm('Bạn có chắc chắn muốn xóa nhân viên này?')) return;
 
     try {
       const response = await fetch(`http://localhost:9000/users/${id}`, {
         method: 'DELETE'
       });
-      
+
       if (response.ok) {
         fetchEmployees();
         alert('Xóa nhân viên thành công!');
@@ -126,31 +114,22 @@ const ManagerList = () => {
     }
   };
 
-  // Handle form input change
+  // Input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submit
+  // Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Đảm bảo status luôn là active
-    const dataToSubmit = {
-      ...formData,
-      status: 'active'
-    };
-    
+    const dataToSubmit = { ...formData, status: 'active' };
+
     if (editingId) {
       updateEmployee(editingId, dataToSubmit);
     } else {
       createEmployee(dataToSubmit);
     }
-    
     resetForm();
   };
 
@@ -162,22 +141,24 @@ const ManagerList = () => {
       password: '',
       phone: '',
       address: '',
-      status: 'active' // Luôn reset về active
+      status: 'active'
     });
     setShowModal(false);
     setEditingId(null);
   };
 
-  // Open modal for create
+  // Open create modal
   const openCreateModal = () => {
     resetForm();
     setShowModal(true);
   };
+
+  // Start edit
   const startEdit = (employee) => {
     setFormData({
       name: employee.name,
       email: employee.email,
-      password: '', // Don't show password
+      password: '',
       phone: employee.phone,
       address: employee.address,
       status: employee.status
@@ -186,13 +167,10 @@ const ManagerList = () => {
     setShowModal(true);
   };
 
-  // Toggle employee status
+  // Toggle status
   const toggleStatus = async (employee) => {
     const newStatus = employee.status === 'active' ? 'inactive' : 'active';
-    await updateEmployee(employee.id, {
-      ...employee,
-      status: newStatus
-    });
+    await updateEmployee(employee.id, { status: newStatus });
   };
 
   // Format date
@@ -204,10 +182,7 @@ const ManagerList = () => {
     <div className="employee-management">
       <div className="header">
         <h1>Quản Lý Nhân Viên Seller</h1>
-        <button 
-          className="btn btn-primary"
-          onClick={openCreateModal}
-        >
+        <button className="btn btn-primary" onClick={openCreateModal}>
           Thêm Nhân Viên
         </button>
       </div>
@@ -218,83 +193,45 @@ const ManagerList = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{editingId ? 'Sửa Nhân Viên' : 'Thêm Nhân Viên Mới'}</h2>
-              <button className="modal-close" onClick={resetForm}>
-                ×
-              </button>
+              <button className="modal-close" onClick={resetForm}>×</button>
             </div>
-            
+
             <div className="modal-body">
               <div className="form-group">
                 <label>Họ tên:</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="Nhập họ tên"
-                  required
-                />
+                <input type="text" name="name" value={formData.name}
+                  onChange={handleInputChange} placeholder="Nhập họ tên" required />
               </div>
 
               <div className="form-group">
                 <label>Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Nhập email"
-                  required
-                />
+                <input type="email" name="email" value={formData.email}
+                  onChange={handleInputChange} placeholder="Nhập email" required />
               </div>
 
               <div className="form-group">
                 <label>Mật khẩu:</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
+                <input type="password" name="password" value={formData.password}
                   onChange={handleInputChange}
                   placeholder={editingId ? "Để trống nếu không đổi" : "Nhập mật khẩu"}
-                  required={!editingId}
-                />
+                  required={!editingId} />
               </div>
 
               <div className="form-group">
                 <label>Số điện thoại:</label>
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  placeholder="Nhập số điện thoại"
-                  required
-                />
+                <input type="text" name="phone" value={formData.phone}
+                  onChange={handleInputChange} placeholder="Nhập số điện thoại" required />
               </div>
 
               <div className="form-group">
                 <label>Địa chỉ:</label>
-                <textarea
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  placeholder="Nhập địa chỉ"
-                  required
-                />
+                <textarea name="address" value={formData.address}
+                  onChange={handleInputChange} placeholder="Nhập địa chỉ" required />
               </div>
-
-              {/* Ẩn trường status - luôn mặc định là active */}
-              <input 
-                type="hidden" 
-                name="status" 
-                value="active" 
-              />
             </div>
 
             <div className="modal-footer">
-              <button type="button" onClick={resetForm} className="btn btn-secondary">
-                Hủy
-              </button>
+              <button type="button" onClick={resetForm} className="btn btn-secondary">Hủy</button>
               <button type="button" onClick={handleSubmit} className="btn btn-success">
                 {editingId ? 'Cập nhật' : 'Thêm'}
               </button>
@@ -306,7 +243,6 @@ const ManagerList = () => {
       {/* Employee List */}
       <div className="employee-list">
         <h2>Danh Sách Nhân Viên ({employees.length})</h2>
-        
         {loading ? (
           <div className="loading">Đang tải...</div>
         ) : employees.length === 0 ? (
@@ -342,24 +278,12 @@ const ManagerList = () => {
                     <td>{formatDate(employee.createdAt)}</td>
                     <td>
                       <div className="actions">
-                        <button 
-                          onClick={() => startEdit(employee)}
-                          className="btn btn-edit"
-                        >
-                          Sửa
-                        </button>
-                        <button 
-                          onClick={() => toggleStatus(employee)}
-                          className={`btn ${employee.status === 'active' ? 'btn-warning' : 'btn-success'}`}
-                        >
+                        <button onClick={() => startEdit(employee)} className="btn btn-edit">Sửa</button>
+                        <button onClick={() => toggleStatus(employee)}
+                          className={`btn ${employee.status === 'active' ? 'btn-warning' : 'btn-success'}`}>
                           {employee.status === 'active' ? 'Vô hiệu' : 'Kích hoạt'}
                         </button>
-                        <button 
-                          onClick={() => deleteEmployee(employee.id)}
-                          className="btn btn-danger"
-                        >
-                          Xóa
-                        </button>
+                        <button onClick={() => deleteEmployee(employee.id)} className="btn btn-danger">Xóa</button>
                       </div>
                     </td>
                   </tr>

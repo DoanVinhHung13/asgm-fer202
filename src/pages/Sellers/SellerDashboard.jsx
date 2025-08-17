@@ -10,6 +10,7 @@ import {
   CloseOutlined,
   BellOutlined,
   UserOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import "./SellerDashboard.css";
@@ -18,6 +19,7 @@ const SellerDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false); // thêm state cho dropdown
 
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: <BarChartOutlined />, path: "/seller/dashboard" },
@@ -27,6 +29,11 @@ const SellerDashboard = () => {
     { id: "employees", label: "Tạo Nhân viên", icon: <TeamOutlined />, path: "/seller/tao-nhan-vien" },
     { id: "settings", label: "Cài đặt", icon: <SettingOutlined />, path: "/seller/cai-dat" },
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // xoá user/token
+    navigate("/"); // chuyển về login
+  };
 
   return (
     <div className="dashboard-container">
@@ -68,14 +75,30 @@ const SellerDashboard = () => {
           <h2>
             {menuItems.find((item) => location.pathname === item.path)?.label || "Dashboard"}
           </h2>
+
+          {/* Actions */}
           <div className="header-actions">
             <button className="icon-btn">
               <BellOutlined />
             </button>
-            <button className="user-btn">
-              <UserOutlined />
-              <span>Admin</span>
-            </button>
+
+            <div className="user-menu">
+              <button
+                className="user-btn"
+                onClick={() => setOpenMenu(!openMenu)}
+              >
+                <UserOutlined />
+                <span>Admin</span>
+              </button>
+
+              {openMenu && (
+                <div className="dropdown-menu">
+                  <button onClick={handleLogout}>
+                    <LogoutOutlined /> Đăng xuất
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 

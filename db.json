@@ -35,25 +35,14 @@
     },
     {
       "id": "4",
-      "name": "a",
-      "email": "admin@gmail.com",
-      "password": "123456",
+      "name": "a1",
+      "email": "chieupvhe1873781@fpt.edu.vn",
+      "password": "",
       "phone": "01234567",
-      "address": "vs",
+      "address": "vb",
       "status": "active",
       "role": "seller",
-      "createdAt": "2025-08-17T05:22:29.137Z"
-    },
-    {
-      "id": "5",
-      "name": "Phạm Văn Chiêu",
-      "email": "admin@gmail.com",
-      "password": "123456",
-      "phone": "01234567",
-      "address": "vd",
-      "status": "active",
-      "role": "seller",
-      "createdAt": "2025-08-17T05:24:54.801Z"
+      "createdAt": "2025-08-17T15:24:13.487Z"
     }
   ],
   "categories": [
@@ -183,7 +172,7 @@
       },
       "note": "Giao hàng giờ hành chính",
       "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2024-01-15T10:30:00Z"
+      "updatedAt": "2025-08-17T06:38:34.338Z"
     },
     {
       "id": "2",
@@ -203,7 +192,7 @@
       "shippingFee": 25000,
       "voucherDiscount": 50000,
       "totalAmount": 374000,
-      "status": "confirmed",
+      "status": "completed",
       "paymentStatus": "paid",
       "shippingAddress": {
         "name": "Trần Thị B",
@@ -212,7 +201,7 @@
       },
       "note": "",
       "createdAt": "2024-01-16T14:20:00Z",
-      "updatedAt": "2024-01-16T15:00:00Z"
+      "updatedAt": "2025-08-17T06:38:29.562Z"
     }
   ],
   "vouchers": [
