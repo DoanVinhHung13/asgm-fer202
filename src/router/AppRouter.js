@@ -22,7 +22,15 @@ const ManagerList = React.lazy(() =>
 const CreateManager = React.lazy(() =>
   import("../pages/Sellers/Employee/CreateManager")
 );
-
+const ProductManagement = React.lazy(() =>
+  import("../pages/Sellers/Products/ProductManagement")
+);
+const OrderManagement = React.lazy(() =>
+  import("../pages/Sellers/Orders/OrderManagement")
+);
+const VoucherManagement = React.lazy(() =>
+  import("../pages/Sellers/Vouchers/VoucherManagement")
+);
 // const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
 
 // // Customer
@@ -47,16 +55,7 @@ const ProductListing = React.lazy(() =>
 // const Profile = React.lazy(() => import("../pages/User/Profile"));
 // const Orders = React.lazy(() => import("../pages/User/Orders"));
 
-// Seller
-const SellerDashboard = React.lazy(() =>
-  import("../pages/Sellers/SellerDashboard")
-);
-const ManagerList = React.lazy(() =>
-  import("../pages/Sellers/Employee/ManagerList")
-);
-const CreateManager = React.lazy(() =>
-  import("../pages/Sellers/Employee/CreateManager")
-);
+
 
 function LazyLoadingComponent({ children }) {
   return (
@@ -229,15 +228,27 @@ const routes = [
     },
       {
         path: "quan-ly-don-hang",
-        element: <div className="content-box">Quản lý Đơn hàng</div>,
+        element: (
+        <LazyLoadingComponent>
+          <OrderManagement />
+        </LazyLoadingComponent>
+      ),
       },
       {
-        path: "tao-san-pham",
-        element: <div className="content-box">Tạo Sản phẩm</div>,
-      },
+      path: "tao-san-pham",   
+      element: (
+        <LazyLoadingComponent>
+          <ProductManagement />
+        </LazyLoadingComponent>
+      ),
+    },
       {
         path: "tao-voucher",
-        element: <div className="content-box">Tạo Voucher</div>,
+        element: (
+        <LazyLoadingComponent>
+          <VoucherManagement />
+        </LazyLoadingComponent>
+      ),
       },
       {
         path: "cai-dat",
