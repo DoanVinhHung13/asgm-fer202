@@ -10,46 +10,56 @@ import {
   Typography,
 } from "antd";
 import React, { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 const { Option } = Select;
 
-const ProductFilter = ({ filters, onFilterChange, categories, products }) => {
-  const navigate = useNavigate();
-
+const ProductFilter = ({
+  filters,
+  onFilterChange,
+  categories,
+  products,
+  onReset,
+}) => {
+  // Handle individual filter changes
   const handleFilterChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
-    onFilterChange(newFilters);
+    onFilterChange({ ...filters, [key]: value });
   };
 
+  // Handle price range change
   const handlePriceRangeChange = (value) => {
-    const newFilters = { ...filters, minPrice: value[0], maxPrice: value[1] };
-    onFilterChange(newFilters);
+    onFilterChange({
+      ...filters,
+      minPrice: value[0],
+      maxPrice: value[1],
+    });
   };
 
-  const handleCategoryClick = (categorySlug) => {
-    if (categorySlug) {
-      navigate(`/${categorySlug}`);
-    } else {
-      navigate("/");
-    }
-  };
-
+  // Reset all filters
   const resetFilters = () => {
-    navigate("/");
+    onReset
+      ? onReset()
+      : onFilterChange({
+          category: "",
+          brand: "",
+          gender: "",
+          minPrice: 0,
+          maxPrice: 1000000,
+          sortBy: "newest",
+        });
   };
 
-  // Memoized calculations
-  const brands = useMemo(
-    () => [...new Set(products.map((product) => product.brand))].sort(),
-    [products]
-  );
+  // Get unique brands
+  const brands = useMemo(() => {
+    if (!products || products.length === 0) return [];
+    return [...new Set(products.map((p) => p.brand))].sort();
+  }, [products]);
 
-  const genders = useMemo(
-    () => [...new Set(products.map((product) => product.gender))].sort(),
-    [products]
-  );
+  // Get unique genders
+  const genders = useMemo(() => {
+    if (!products || products.length === 0) return [];
+    return [...new Set(products.map((p) => p.gender))].sort();
+  }, [products]);
 
   return (
     <Card
@@ -78,7 +88,7 @@ const ProductFilter = ({ filters, onFilterChange, categories, products }) => {
           value={filters.sortBy}
           onChange={(value) => handleFilterChange("sortBy", value)}
           style={{ width: "100%" }}
-          size="small"
+          size="middle"
         >
           <Option value="newest">Mới nhất</Option>
           <Option value="priceAsc">Giá thấp đến cao</Option>
@@ -90,67 +100,76 @@ const ProductFilter = ({ filters, onFilterChange, categories, products }) => {
       <Divider />
 
       {/* Category */}
-      <div style={{ marginBottom: 24 }}>
-        <Title level={5}>Danh mục chi tiết</Title>
-        <Radio.Group
-          value={filters.category}
-          onChange={(e) => handleFilterChange("category", e.target.value)}
-          style={{ width: "100%" }}
-        >
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Radio value="">Tất cả</Radio>
-            {categories.map((category) => (
-              <Radio key={category.id} value={category.slug}>
-                {category.name}
-              </Radio>
-            ))}
-          </Space>
-        </Radio.Group>
-      </div>
-
-      <Divider />
+      {categories && categories.length > 0 && (
+        <>
+          <div style={{ marginBottom: 24 }}>
+            <Title level={5}>Danh mục</Title>
+            <Radio.Group
+              value={filters.category}
+              onChange={(e) => handleFilterChange("category", e.target.value)}
+              style={{ width: "100%" }}
+            >
+              <Space direction="vertical" style={{ width: "100%" }}>
+                <Radio value="">Tất cả</Radio>
+                {categories.map((category) => (
+                  <Radio key={category.id} value={category.slug}>
+                    {category.name}
+                  </Radio>
+                ))}
+              </Space>
+            </Radio.Group>
+          </div>
+          <Divider />
+        </>
+      )}
 
       {/* Brand */}
-      <div style={{ marginBottom: 24 }}>
-        <Title level={5}>Thương hiệu</Title>
-        <Radio.Group
-          value={filters.brand}
-          onChange={(e) => handleFilterChange("brand", e.target.value)}
-          style={{ width: "100%" }}
-        >
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Radio value="">Tất cả</Radio>
-            {brands.map((brand) => (
-              <Radio key={brand} value={brand}>
-                {brand}
-              </Radio>
-            ))}
-          </Space>
-        </Radio.Group>
-      </div>
-
-      <Divider />
+      {brands.length > 0 && (
+        <>
+          <div style={{ marginBottom: 24 }}>
+            <Title level={5}>Thương hiệu</Title>
+            <Radio.Group
+              value={filters.brand}
+              onChange={(e) => handleFilterChange("brand", e.target.value)}
+              style={{ width: "100%" }}
+            >
+              <Space direction="vertical" style={{ width: "100%" }}>
+                <Radio value="">Tất cả</Radio>
+                {brands.map((brand) => (
+                  <Radio key={brand} value={brand}>
+                    {brand}
+                  </Radio>
+                ))}
+              </Space>
+            </Radio.Group>
+          </div>
+          <Divider />
+        </>
+      )}
 
       {/* Gender */}
-      <div style={{ marginBottom: 24 }}>
-        <Title level={5}>Giới tính</Title>
-        <Radio.Group
-          value={filters.gender}
-          onChange={(e) => handleFilterChange("gender", e.target.value)}
-          style={{ width: "100%" }}
-        >
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Radio value="">Tất cả</Radio>
-            {genders.map((gender) => (
-              <Radio key={gender} value={gender}>
-                {gender}
-              </Radio>
-            ))}
-          </Space>
-        </Radio.Group>
-      </div>
-
-      <Divider />
+      {genders.length > 0 && (
+        <>
+          <div style={{ marginBottom: 24 }}>
+            <Title level={5}>Giới tính</Title>
+            <Radio.Group
+              value={filters.gender}
+              onChange={(e) => handleFilterChange("gender", e.target.value)}
+              style={{ width: "100%" }}
+            >
+              <Space direction="vertical" style={{ width: "100%" }}>
+                <Radio value="">Tất cả</Radio>
+                {genders.map((gender) => (
+                  <Radio key={gender} value={gender}>
+                    {gender}
+                  </Radio>
+                ))}
+              </Space>
+            </Radio.Group>
+          </div>
+          <Divider />
+        </>
+      )}
 
       {/* Price Range */}
       <div style={{ marginBottom: 24 }}>
@@ -160,16 +179,16 @@ const ProductFilter = ({ filters, onFilterChange, categories, products }) => {
           min={0}
           max={1000000}
           step={10000}
-          value={[filters.minPrice || 0, filters.maxPrice || 1000000]}
+          value={[filters.minPrice, filters.maxPrice]}
           onChange={handlePriceRangeChange}
           style={{ margin: "16px 0" }}
           tooltip={{
-            formatter: (value) => `${value.toLocaleString()} VNĐ`,
+            formatter: (value) => `${value.toLocaleString("vi-VN")} ₫`,
           }}
         />
         <Space style={{ width: "100%", justifyContent: "space-between" }}>
-          <span>{filters.minPrice.toLocaleString()} VNĐ</span>
-          <span>{filters.maxPrice.toLocaleString()} VNĐ</span>
+          <span>{filters.minPrice.toLocaleString("vi-VN")} ₫</span>
+          <span>{filters.maxPrice.toLocaleString("vi-VN")} ₫</span>
         </Space>
       </div>
     </Card>

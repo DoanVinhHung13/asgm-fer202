@@ -17,16 +17,14 @@ const ProductDetail = () => {
       setLoading(true);
       try {
         const response = await fetch(`http://localhost:9000/products/${id}`);
-        console.log("Fetching:", `http://localhost:9000/products/${id}`);
-
+        console.log("response", response);
         if (response.ok) {
           const productData = await response.json();
-          console.log(productData);
+          console.log("productData", productData);
           setProduct(productData);
           setSelectedVariant(productData.variants[0]);
         } else {
-          // Product not found
-          navigate("/404");
+          // navigate("/404");
         }
       } catch (error) {
         console.error("Error fetching product:", error);

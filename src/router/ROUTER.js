@@ -7,12 +7,6 @@ const ROUTER = {
   DOI_MAT_KHAU: "/doi-mat-khau",
   CAP_NHAT_THONG_TIN: "/cap-nhat-thong-tin",
 
-  // Product Categories
-  QUAN: "/quan",
-  AO: "/ao",
-  GIAY: "/giay",
-  PHU_KIEN: "/phu-kien",
-
   // Product routes
   SAN_PHAM: "/san-pham",
   CHI_TIET_SAN_PHAM: "/san-pham/:id",
