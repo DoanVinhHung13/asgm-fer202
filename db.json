@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "seller@example.com",
       "password": "123456",
       "role": "seller",
@@ -12,7 +12,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "customer@example.com",
       "password": "123456",
       "role": "customer",
@@ -23,7 +23,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "admin@example.com",
       "password": "admin123",
       "role": "admin",
@@ -34,50 +34,122 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": "a02f",
-      "name": "aa",
-      "email": "admin@gmail.com",
-      "password": "123456",
+      "id": "4",
+      "name": "a1",
+      "email": "chieupvhe1873781@fpt.edu.vn",
+      "password": "",
       "phone": "01234567",
-      "address": "aa",
-      "role": "manager",
+      "address": "vb",
       "status": "active",
-      "createdAt": "2025-08-14T18:41:52.620Z"
+      "role": "seller",
+      "createdAt": "2025-08-17T15:24:13.487Z"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Áo thời trang",
       "description": "Các loại áo thời trang nam nữ",
       "status": "active",
       "image": "/img/shirt.avif"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Quần thời trang",
       "description": "Các loại quần thời trang nam nữ",
       "status": "active",
       "image": "/img/pants.avif"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Phụ kiện",
       "description": "Phụ kiện thời trang",
       "status": "active",
       "image": "/img/accessories.avif"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Giày",
       "description": "Giày thời trang",
       "status": "active",
       "image": "/img/AIR+MAX+TL+2.5.avif"
     }
   ],
+<<<<<<< HEAD
+=======
+  "products": [
+    {
+      "id": "1",
+      "name": "Áo thun nam basic",
+      "description": "Áo thun nam chất liệu cotton 100%",
+      "price": 199000,
+      "originalPrice": 250000,
+      "categoryId": 1,
+      "sellerId": 1,
+      "images": [
+        "/img/ao_thun_1.avif"
+      ],
+      "variants": [
+        {
+          "id": 1,
+          "color": "Đỏ",
+          "size": "M",
+          "stock": 50,
+          "sku": "AT001-RED-M"
+        },
+        {
+          "id": 2,
+          "color": "Đỏ",
+          "size": "L",
+          "stock": 30,
+          "sku": "AT001-RED-L"
+        },
+        {
+          "id": 3,
+          "color": "Xanh",
+          "size": "M",
+          "stock": 40,
+          "sku": "AT001-BLUE-M"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Quần jeans nữ",
+      "description": "Quần jeans nữ dáng slim fit",
+      "price": 399000,
+      "originalPrice": 499000,
+      "categoryId": 2,
+      "sellerId": 1,
+      "images": [
+        "/img/quan1.avif"
+      ],
+      "variants": [
+        {
+          "id": 4,
+          "color": "Xanh đậm",
+          "size": "S",
+          "stock": 25,
+          "sku": "QJ001-DARKBLUE-S"
+        },
+        {
+          "id": 5,
+          "color": "Xanh đậm",
+          "size": "M",
+          "stock": 35,
+          "sku": "QJ001-DARKBLUE-M"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2024-01-02T00:00:00Z"
+    }
+  ],
+>>>>>>> 0525f42d514b6a28eb862a46c26beafa637ec232
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "customerId": 2,
       "sellerId": 1,
       "orderCode": "ORD001",
@@ -103,10 +175,10 @@
       },
       "note": "Giao hàng giờ hành chính",
       "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2024-01-15T10:30:00Z"
+      "updatedAt": "2025-08-17T06:38:34.338Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "customerId": 2,
       "sellerId": 1,
       "orderCode": "ORD002",
@@ -123,7 +195,7 @@
       "shippingFee": 25000,
       "voucherDiscount": 50000,
       "totalAmount": 374000,
-      "status": "confirmed",
+      "status": "completed",
       "paymentStatus": "paid",
       "shippingAddress": {
         "name": "Trần Thị B",
@@ -132,12 +204,12 @@
       },
       "note": "",
       "createdAt": "2024-01-16T14:20:00Z",
-      "updatedAt": "2024-01-16T15:00:00Z"
+      "updatedAt": "2025-08-17T06:38:29.562Z"
     }
   ],
   "vouchers": [
     {
-      "id": 1,
+      "id": "1",
       "code": "WELCOME50",
       "name": "Voucher chào mừng",
       "description": "Giảm 50k cho đơn hàng từ 300k",
@@ -154,7 +226,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "code": "SALE20",
       "name": "Giảm 20%",
       "description": "Giảm 20% tối đa 100k",
@@ -173,7 +245,7 @@
   ],
   "cart": [
     {
-      "id": 1,
+      "id": "1",
       "customerId": 2,
       "productId": 1,
       "variantId": 1,
