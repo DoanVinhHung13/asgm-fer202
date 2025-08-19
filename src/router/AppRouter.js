@@ -16,6 +16,12 @@ const ProductList = React.lazy(() =>
 // Private Pages
 const PrivateRouters = React.lazy(() =>
   import("../pages/SUPPORTPAGES/PrivateRouters")
+);
+
+const SellerRoutes = React.lazy(() =>
+  import("../pages/SUPPORTPAGES/SellerRoutes")
+);
+
 //Seller
 const SellerDashboard = React.lazy(() =>
   import("../pages/Sellers/SellerDashboard")
@@ -40,9 +46,7 @@ const VoucherManagement = React.lazy(() =>
 // // Customer
 // const ProductList = React.lazy(() => import("src/pages/CUSTOMER/ProductList"));
 // Product Pages
-const ProductListing = React.lazy(() =>
-  import("../pages/User/Products/ProductListing")
-);
+
 const ProductDetail = React.lazy(() =>
   import("../pages/User/Products/components/ProductDetail")
 );
@@ -51,24 +55,9 @@ const ProductDetail = React.lazy(() =>
 // const Orders = React.lazy(() => import("../pages/User/Orders"));
 // const Favorites = React.lazy(() => import("../pages/Shopping/Favorites"));
 
-// Seller Pages
-const SellerRoutes = React.lazy(() =>
-  import("../pages/SUPPORTPAGES/SellerRoutes")
-);
-const SellerDashboard = React.lazy(() =>
-  import("../pages/Sellers/SellerDashboard")
-);
-const ManagerList = React.lazy(() =>
-  import("../pages/Sellers/Employee/ManagerList")
-);
-const CreateManager = React.lazy(() =>
-  import("../pages/Sellers/Employee/CreateManager")
-);
 // // User Pages
 // const Profile = React.lazy(() => import("../pages/User/Profile"));
 // const Orders = React.lazy(() => import("../pages/User/Orders"));
-
-
 
 function LazyLoadingComponent({ children }) {
   return (
@@ -138,7 +127,6 @@ const routes = [
     ],
   },
   {
-    path: "/seller",
     element: (
       <LazyLoadingComponent>
         <SellerRoutes />
@@ -192,44 +180,44 @@ const routes = [
         element: <div className="content-box">Đây là trang Dashboard</div>,
       },
       {
-      path: "tao-nhan-vien",   
-      element: (
-        <LazyLoadingComponent>
-          <ManagerList />
-        </LazyLoadingComponent>
-      ),
-    },
-    {
-      path: "tao-nhan-vien/create", 
-      element: (
-        <LazyLoadingComponent>
-          <CreateManager />
-        </LazyLoadingComponent>
-      ),
-    },
+        path: "tao-nhan-vien",
+        element: (
+          <LazyLoadingComponent>
+            <ManagerList />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: "tao-nhan-vien/create",
+        element: (
+          <LazyLoadingComponent>
+            <CreateManager />
+          </LazyLoadingComponent>
+        ),
+      },
       {
         path: "quan-ly-don-hang",
         element: (
-        <LazyLoadingComponent>
-          <OrderManagement />
-        </LazyLoadingComponent>
-      ),
+          <LazyLoadingComponent>
+            <OrderManagement />
+          </LazyLoadingComponent>
+        ),
       },
       {
-      path: "tao-san-pham",   
-      element: (
-        <LazyLoadingComponent>
-          <ProductManagement />
-        </LazyLoadingComponent>
-      ),
-    },
+        path: "tao-san-pham",
+        element: (
+          <LazyLoadingComponent>
+            <ProductManagement />
+          </LazyLoadingComponent>
+        ),
+      },
       {
         path: "tao-voucher",
         element: (
-        <LazyLoadingComponent>
-          <VoucherManagement />
-        </LazyLoadingComponent>
-      ),
+          <LazyLoadingComponent>
+            <VoucherManagement />
+          </LazyLoadingComponent>
+        ),
       },
       {
         path: "cai-dat",

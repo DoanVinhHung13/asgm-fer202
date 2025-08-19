@@ -45,36 +45,6 @@
       "createdAt": "2025-08-17T15:24:13.487Z"
     }
   ],
-  "categories": [
-    {
-      "id": "1",
-      "name": "Áo thời trang",
-      "description": "Các loại áo thời trang nam nữ",
-      "status": "active",
-      "image": "/img/shirt.avif"
-    },
-    {
-      "id": "2",
-      "name": "Quần thời trang",
-      "description": "Các loại quần thời trang nam nữ",
-      "status": "active",
-      "image": "/img/pants.avif"
-    },
-    {
-      "id": "3",
-      "name": "Phụ kiện",
-      "description": "Phụ kiện thời trang",
-      "status": "active",
-      "image": "/img/accessories.avif"
-    },
-    {
-      "id": "4",
-      "name": "Giày",
-      "description": "Giày thời trang",
-      "status": "active",
-      "image": "/img/AIR+MAX+TL+2.5.avif"
-    }
-  ],
   "orders": [
     {
       "id": "1",
