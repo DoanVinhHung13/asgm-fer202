@@ -180,7 +180,10 @@ const routes = [
       },
     ],
   },
-        <SellerDashboard />
+  {
+    element: (
+      <LazyLoadingComponent>
+        <SellerRoutes />
       </LazyLoadingComponent>
     ),
     children: [
