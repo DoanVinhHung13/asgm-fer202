@@ -16,10 +16,14 @@ const Header = () => {
 
   const navItems = [
     { key: "new", label: "Bộ sưu tập mới", path: "/bo-suu-tap" },
-    { key: "women", label: "Áo", path: "/ao-thun" },
-    { key: "men", label: "Quần", path: "/quan" },
-    { key: "accessories", label: "Phụ kiện", path: "/phu-kien" },
-    { key: "shoes", label: "Giày", path: "/giay" },
+    { key: "women", label: "Áo", path: "/san-pham?category=ao" },
+    { key: "men", label: "Quần", path: "/san-pham?category=quan" },
+    {
+      key: "accessories",
+      label: "Phụ kiện",
+      path: "/san-pham?category=phu-kien",
+    },
+    { key: "shoes", label: "Giày", path: "/san-pham?category=giay" },
   ];
 
   // User menu items based on role

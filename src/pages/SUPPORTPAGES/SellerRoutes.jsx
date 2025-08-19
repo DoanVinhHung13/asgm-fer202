@@ -2,10 +2,8 @@
 import { Layout } from "antd";
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import SellerHeader from "src/components/Layout/SellerHeader";
-import SellerSidebar from "src/components/Layout/SellerSidebar";
-import { AuthContext } from "src/context/AuthContext";
-import ROUTER from "src/router/ROUTER";
+import { AuthContext } from "../../context/AuthContext";
+import ROUTER from "../../router/ROUTER";
 
 const SellerRoutes = () => {
   const { user, isAuthenticated } = useContext(AuthContext);
@@ -16,9 +14,9 @@ const SellerRoutes = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <SellerSidebar />
+      {/* <SellerSidebar /> */}
       <Layout>
-        <SellerHeader />
+        {/* <SellerHeader /> */}
         <Layout.Content
           style={{ margin: "24px 16px", padding: 24, background: "#fff" }}
         >

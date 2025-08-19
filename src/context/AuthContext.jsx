@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch("http://localhost:3001/users", {
+      const response = await fetch("http://localhost:9000/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

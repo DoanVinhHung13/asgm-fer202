@@ -1,4 +1,3 @@
-// src/pages/SUPPORTPAGES/PublicRouters.js
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";

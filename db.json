@@ -75,71 +75,6 @@
       "image": "/img/AIR+MAX+TL+2.5.avif"
     }
   ],
-  "products": [
-    {
-      "id": 1,
-      "name": "Áo thun nam basic",
-      "description": "Áo thun nam chất liệu cotton 100%",
-      "price": 199000,
-      "originalPrice": 250000,
-      "categoryId": 1,
-      "sellerId": 1,
-      "images": ["/img/ao_thun_1.avif"],
-      "variants": [
-        {
-          "id": 1,
-          "color": "Đỏ",
-          "size": "M",
-          "stock": 50,
-          "sku": "AT001-RED-M"
-        },
-        {
-          "id": 2,
-          "color": "Đỏ",
-          "size": "L",
-          "stock": 30,
-          "sku": "AT001-RED-L"
-        },
-        {
-          "id": 3,
-          "color": "Xanh",
-          "size": "M",
-          "stock": 40,
-          "sku": "AT001-BLUE-M"
-        }
-      ],
-      "status": "active",
-      "createdAt": "2024-01-01T00:00:00Z"
-    },
-    {
-      "id": 2,
-      "name": "Quần jeans nữ",
-      "description": "Quần jeans nữ dáng slim fit",
-      "price": 399000,
-      "originalPrice": 499000,
-      "categoryId": 2,
-      "sellerId": 1,
-      "images": ["/img/quan1.avif"],
-      "variants": [
-        {
-          "id": 4,
-          "color": "Xanh đậm",
-          "size": "S",
-          "stock": 25,
-          "sku": "QJ001-DARKBLUE-S"
-        },
-        {
-          "id": 5,
-          "color": "Xanh đậm",
-          "size": "M",
-          "stock": 35,
-          "sku": "QJ001-DARKBLUE-M"
-        }
-      ],
-      "status": "active",
-      "createdAt": "2024-01-02T00:00:00Z"
-    }
-  ],
   "orders": [
     {
       "id": 1,
@@ -244,6 +179,533 @@
       "variantId": 1,
       "quantity": 1,
       "addedAt": "2024-01-17T09:00:00Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Áo thun nam basic",
+      "description": "Áo thun nam chất liệu cotton 100%, form regular fit, phù hợp mặc hàng ngày",
+      "price": 199000,
+      "originalPrice": 250000,
+      "brand": "Nike",
+      "gender": "Nam",
+      "categoryId": 1,
+      "images": ["/img/ao_thun_1.avif", "/img/ao_thun_1_2.avif"],
+      "variants": [
+        {
+          "id": 1,
+          "color": "Đỏ",
+          "size": "M",
+          "stock": 50,
+          "sku": "AT001-RED-M"
+        },
+        {
+          "id": 2,
+          "color": "Đỏ",
+          "size": "L",
+          "stock": 30,
+          "sku": "AT001-RED-L"
+        },
+        {
+          "id": 3,
+          "color": "Đỏ",
+          "size": "XL",
+          "stock": 25,
+          "sku": "AT001-RED-XL"
+        },
+        {
+          "id": 4,
+          "color": "Xanh dương",
+          "size": "M",
+          "stock": 40,
+          "sku": "AT001-BLUE-M"
+        },
+        {
+          "id": 5,
+          "color": "Xanh dương",
+          "size": "L",
+          "stock": 35,
+          "sku": "AT001-BLUE-L"
+        },
+        {
+          "id": 6,
+          "color": "Đen",
+          "size": "M",
+          "stock": 45,
+          "sku": "AT001-BLACK-M"
+        },
+        {
+          "id": 7,
+          "color": "Đen",
+          "size": "L",
+          "stock": 38,
+          "sku": "AT001-BLACK-L"
+        }
+      ],
+      "rating": 4.5,
+      "reviewCount": 23,
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Quần jeans nam slim",
+      "description": "Quần jeans nam form slim, chất liệu denim cao cấp, phù hợp đi làm và đi chơi",
+      "price": 450000,
+      "originalPrice": null,
+      "brand": "Adidas",
+      "gender": "Nam",
+      "categoryId": 2,
+      "images": ["/img/quan_jeans_1.avif"],
+      "variants": [
+        {
+          "id": 8,
+          "color": "Xanh dương",
+          "size": "M",
+          "stock": 20,
+          "sku": "QJ001-BLUE-M"
+        },
+        {
+          "id": 9,
+          "color": "Xanh dương",
+          "size": "L",
+          "stock": 25,
+          "sku": "QJ001-BLUE-L"
+        },
+        {
+          "id": 10,
+          "color": "Xanh dương",
+          "size": "XL",
+          "stock": 18,
+          "sku": "QJ001-BLUE-XL"
+        },
+        {
+          "id": 11,
+          "color": "Đen",
+          "size": "M",
+          "stock": 22,
+          "sku": "QJ001-BLACK-M"
+        },
+        {
+          "id": 12,
+          "color": "Đen",
+          "size": "L",
+          "stock": 28,
+          "sku": "QJ001-BLACK-L"
+        }
+      ],
+      "rating": 4.2,
+      "reviewCount": 15,
+      "status": "active",
+      "createdAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Áo sơ mi nữ công sở",
+      "description": "Áo sơ mi nữ form fitted, chất liệu lụa cao cấp, phù hợp đi làm và dự tiệc",
+      "price": 320000,
+      "originalPrice": 400000,
+      "brand": "Puma",
+      "gender": "Nữ",
+      "categoryId": 1,
+      "images": ["/img/ao_somi_nu_1.avif"],
+      "variants": [
+        {
+          "id": 13,
+          "color": "Trắng",
+          "size": "S",
+          "stock": 30,
+          "sku": "ASM001-WHITE-S"
+        },
+        {
+          "id": 14,
+          "color": "Trắng",
+          "size": "M",
+          "stock": 35,
+          "sku": "ASM001-WHITE-M"
+        },
+        {
+          "id": 15,
+          "color": "Trắng",
+          "size": "L",
+          "stock": 25,
+          "sku": "ASM001-WHITE-L"
+        },
+        {
+          "id": 16,
+          "color": "Hồng",
+          "size": "S",
+          "stock": 20,
+          "sku": "ASM001-PINK-S"
+        },
+        {
+          "id": 17,
+          "color": "Hồng",
+          "size": "M",
+          "stock": 28,
+          "sku": "ASM001-PINK-M"
+        }
+      ],
+      "rating": 4.7,
+      "reviewCount": 31,
+      "status": "active",
+      "createdAt": "2024-02-01T00:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Giày sneaker unisex",
+      "description": "Giày sneaker phong cách thể thao, đế cao su chống trượt, phù hợp cả nam và nữ",
+      "price": 890000,
+      "originalPrice": null,
+      "brand": "Converse",
+      "gender": "Unisex",
+      "categoryId": 4,
+      "images": ["/img/giay_sneaker_1.avif"],
+      "variants": [
+        {
+          "id": 18,
+          "color": "Trắng",
+          "size": "38",
+          "stock": 15,
+          "sku": "GS001-WHITE-38"
+        },
+        {
+          "id": 19,
+          "color": "Trắng",
+          "size": "39",
+          "stock": 18,
+          "sku": "GS001-WHITE-39"
+        },
+        {
+          "id": 20,
+          "color": "Trắng",
+          "size": "40",
+          "stock": 22,
+          "sku": "GS001-WHITE-40"
+        },
+        {
+          "id": 21,
+          "color": "Đen",
+          "size": "38",
+          "stock": 12,
+          "sku": "GS001-BLACK-38"
+        },
+        {
+          "id": 22,
+          "color": "Đen",
+          "size": "39",
+          "stock": 16,
+          "sku": "GS001-BLACK-39"
+        },
+        {
+          "id": 23,
+          "color": "Đen",
+          "size": "40",
+          "stock": 20,
+          "sku": "GS001-BLACK-40"
+        }
+      ],
+      "rating": 4.6,
+      "reviewCount": 42,
+      "status": "active",
+      "createdAt": "2024-02-10T00:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Túi xách nữ mini",
+      "description": "Túi xách nữ size mini, thiết kế thời trang, chất liệu da tổng hợp cao cấp",
+      "price": 280000,
+      "originalPrice": 350000,
+      "brand": "Vans",
+      "gender": "Nữ",
+      "categoryId": 3,
+      "images": ["/img/tui_xach_mini_1.avif"],
+      "variants": [
+        {
+          "id": 24,
+          "color": "Đen",
+          "size": "OneSize",
+          "stock": 25,
+          "sku": "TX001-BLACK-OS"
+        },
+        {
+          "id": 25,
+          "color": "Vàng",
+          "size": "OneSize",
+          "stock": 18,
+          "sku": "TX001-YELLOW-OS"
+        },
+        {
+          "id": 26,
+          "color": "Hồng",
+          "size": "OneSize",
+          "stock": 22,
+          "sku": "TX001-PINK-OS"
+        }
+      ],
+      "rating": 4.3,
+      "reviewCount": 18,
+      "status": "active",
+      "createdAt": "2024-02-20T00:00:00Z"
+    },
+    {
+      "id": 6,
+      "name": "Áo hoodie unisex",
+      "description": "Áo hoodie form oversize, chất liệu nỉ cotton ấm áp, phù hợp mùa đông",
+      "price": 550000,
+      "originalPrice": null,
+      "brand": "StyleHub",
+      "gender": "Unisex",
+      "categoryId": 1,
+      "images": ["/img/ao_hoodie_1.avif"],
+      "variants": [
+        {
+          "id": 27,
+          "color": "Xám",
+          "size": "M",
+          "stock": 30,
+          "sku": "AH001-GRAY-M"
+        },
+        {
+          "id": 28,
+          "color": "Xám",
+          "size": "L",
+          "stock": 35,
+          "sku": "AH001-GRAY-L"
+        },
+        {
+          "id": 29,
+          "color": "Đen",
+          "size": "M",
+          "stock": 28,
+          "sku": "AH001-BLACK-M"
+        },
+        {
+          "id": 30,
+          "color": "Đen",
+          "size": "L",
+          "stock": 32,
+          "sku": "AH001-BLACK-L"
+        },
+        {
+          "id": 31,
+          "color": "Đen",
+          "size": "XL",
+          "stock": 25,
+          "sku": "AH001-BLACK-XL"
+        }
+      ],
+      "rating": 4.8,
+      "reviewCount": 67,
+      "status": "active",
+      "createdAt": "2024-08-15T00:00:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Quần short thể thao",
+      "description": "Quần short thể thao, chất liệu polyester thoáng mát, phù hợp tập gym",
+      "price": 180000,
+      "originalPrice": 220000,
+      "brand": "Nike",
+      "gender": "Unisex",
+      "categoryId": 2,
+      "images": ["/img/quan_short_1.avif"],
+      "variants": [
+        {
+          "id": 32,
+          "color": "Đen",
+          "size": "S",
+          "stock": 40,
+          "sku": "QS001-BLACK-S"
+        },
+        {
+          "id": 33,
+          "color": "Đen",
+          "size": "M",
+          "stock": 45,
+          "sku": "QS001-BLACK-M"
+        },
+        {
+          "id": 34,
+          "color": "Đen",
+          "size": "L",
+          "stock": 35,
+          "sku": "QS001-BLACK-L"
+        },
+        {
+          "id": 35,
+          "color": "Xanh lá",
+          "size": "S",
+          "stock": 25,
+          "sku": "QS001-GREEN-S"
+        },
+        {
+          "id": 36,
+          "color": "Xanh lá",
+          "size": "M",
+          "stock": 30,
+          "sku": "QS001-GREEN-M"
+        }
+      ],
+      "rating": 4.4,
+      "reviewCount": 28,
+      "status": "active",
+      "createdAt": "2024-08-10T00:00:00Z"
+    },
+    {
+      "id": 8,
+      "name": "Giày cao gót nữ",
+      "description": "Giày cao gót nữ 5cm, chất liệu da mềm, phù hợp đi làm và dự tiệc",
+      "price": 650000,
+      "originalPrice": 800000,
+      "brand": "StyleHub",
+      "gender": "Nữ",
+      "categoryId": 4,
+      "images": ["/img/giay_cao_got_1.avif"],
+      "variants": [
+        {
+          "id": 37,
+          "color": "Đen",
+          "size": "36",
+          "stock": 20,
+          "sku": "GCG001-BLACK-36"
+        },
+        {
+          "id": 38,
+          "color": "Đen",
+          "size": "37",
+          "stock": 25,
+          "sku": "GCG001-BLACK-37"
+        },
+        {
+          "id": 39,
+          "color": "Đen",
+          "size": "38",
+          "stock": 22,
+          "sku": "GCG001-BLACK-38"
+        },
+        {
+          "id": 40,
+          "color": "Đỏ",
+          "size": "36",
+          "stock": 15,
+          "sku": "GCG001-RED-36"
+        },
+        {
+          "id": 41,
+          "color": "Đỏ",
+          "size": "37",
+          "stock": 18,
+          "sku": "GCG001-RED-37"
+        }
+      ],
+      "rating": 4.1,
+      "reviewCount": 12,
+      "status": "active",
+      "createdAt": "2024-08-05T00:00:00Z"
+    },
+    {
+      "id": 9,
+      "name": "Ví nam da thật",
+      "description": "Ví nam chất liệu da thật cao cấp, thiết kế tinh tế, nhiều ngăn đựng thẻ",
+      "price": 420000,
+      "originalPrice": null,
+      "brand": "StyleHub",
+      "gender": "Nam",
+      "categoryId": 3,
+      "images": ["/img/vi_nam_1.avif"],
+      "variants": [
+        {
+          "id": 42,
+          "color": "Đen",
+          "size": "OneSize",
+          "stock": 35,
+          "sku": "VN001-BLACK-OS"
+        },
+        {
+          "id": 43,
+          "color": "Nâu",
+          "size": "OneSize",
+          "stock": 28,
+          "sku": "VN001-BROWN-OS"
+        }
+      ],
+      "rating": 4.6,
+      "reviewCount": 21,
+      "status": "active",
+      "createdAt": "2024-08-01T00:00:00Z"
+    },
+    {
+      "id": 10,
+      "name": "Váy nữ dự tiệc",
+      "description": "Váy nữ thiết kế thanh lịch, chất liệu chiffon mềm mại, phù hợp dự tiệc",
+      "price": 680000,
+      "originalPrice": 850000,
+      "brand": "Puma",
+      "gender": "Nữ",
+      "categoryId": 1,
+      "images": ["/img/vay_nu_1.avif"],
+      "variants": [
+        {
+          "id": 44,
+          "color": "Đen",
+          "size": "S",
+          "stock": 15,
+          "sku": "VN001-BLACK-S"
+        },
+        {
+          "id": 45,
+          "color": "Đen",
+          "size": "M",
+          "stock": 20,
+          "sku": "VN001-BLACK-M"
+        },
+        {
+          "id": 46,
+          "color": "Hồng",
+          "size": "S",
+          "stock": 12,
+          "sku": "VN001-PINK-S"
+        },
+        {
+          "id": 47,
+          "color": "Hồng",
+          "size": "M",
+          "stock": 18,
+          "sku": "VN001-PINK-M"
+        }
+      ],
+      "rating": 4.9,
+      "reviewCount": 8,
+      "status": "active",
+      "createdAt": "2024-07-28T00:00:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Áo",
+      "slug": "ao",
+      "description": "Các loại áo thời trang"
+    },
+    {
+      "id": 2,
+      "name": "Quần",
+      "slug": "quan",
+      "description": "Các loại quần thời trang"
+    },
+    {
+      "id": 3,
+      "name": "Phụ kiện",
+      "slug": "phu-kien",
+      "description": "Phụ kiện thời trang"
+    },
+    {
+      "id": 4,
+      "name": "Giày",
+      "slug": "giay",
+      "description": "Giày thời trang"
     }
   ]
 }

@@ -3,36 +3,32 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 import ROUTER from "./ROUTER";
 
-// Common
+// Public Pages
+const Home = React.lazy(() => import("../pages/SUPPORTPAGES/Home"));
+const Login = React.lazy(() => import("../pages/SUPPORTPAGES/Login"));
 const PublicRouters = React.lazy(() =>
   import("../pages/SUPPORTPAGES/PublicRouters")
 );
-
-// Anonymous
-const Home = React.lazy(() => import("../pages/SUPPORTPAGES/Home"));
-const Login = React.lazy(() => import("../pages/SUPPORTPAGES/Login"));
-
-// Product Pages
-const ProductListing = React.lazy(() =>
-  import("../pages/User/Products/ProductListing")
+const ProductList = React.lazy(() =>
+  import("../pages/User/Products/ProductList")
 );
-// const ProductDetail = React.lazy(() =>
-//   import("../pages/Products/ProductDetail")
-// );
-// const SearchResults = React.lazy(() =>
-//   import("../pages/Products/SearchResults")
-// );
 
-// // Shopping Pages
-// const Cart = React.lazy(() => import("../pages/Shopping/Cart"));
-// const Checkout = React.lazy(() => import("../pages/Shopping/Checkout"));
+// Private Pages
+const PrivateRouters = React.lazy(() =>
+  import("../pages/SUPPORTPAGES/PrivateRouters")
+);
+const ProductDetail = React.lazy(() =>
+  import("../pages/User/Products/components/ProductDetail")
+);
+// const Cart = React.lazy(() => import("../pages/User/Cart"));
+
+// const Orders = React.lazy(() => import("../pages/User/Orders"));
 // const Favorites = React.lazy(() => import("../pages/Shopping/Favorites"));
 
-// // User Pages
-// const Profile = React.lazy(() => import("../pages/User/Profile"));
-// const Orders = React.lazy(() => import("../pages/User/Orders"));
-
-// Seller
+// Seller Pages
+const SellerRoutes = React.lazy(() =>
+  import("../pages/SUPPORTPAGES/SellerRoutes")
+);
 const SellerDashboard = React.lazy(() =>
   import("../pages/Sellers/SellerDashboard")
 );
@@ -83,138 +79,74 @@ const routes = [
         ),
       },
 
-      // Product Category Routes - All use the same ProductListing component
       {
-        path: ROUTER.QUAN,
+        path: ROUTER.SAN_PHAM,
         element: (
           <LazyLoadingComponent>
-            <ProductListing />
+            <ProductList />
           </LazyLoadingComponent>
         ),
       },
-      {
-        path: ROUTER.AO,
-        element: (
-          <LazyLoadingComponent>
-            <ProductListing />
-          </LazyLoadingComponent>
-        ),
-      },
-      {
-        path: ROUTER.GIAY,
-        element: (
-          <LazyLoadingComponent>
-            <ProductListing />
-          </LazyLoadingComponent>
-        ),
-      },
-      {
-        path: ROUTER.PHU_KIEN,
-        element: (
-          <LazyLoadingComponent>
-            <ProductListing />
-          </LazyLoadingComponent>
-        ),
-      },
-
-      // // Product Detail Route
-      // {
-      //   path: ROUTER.CHI_TIET_SAN_PHAM,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <ProductDetail />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
-
-      // // Search Route
-      // {
-      //   path: ROUTER.TIM_KIEM,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <SearchResults />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
-
-      // // Shopping Routes (require authentication)
-      // {
-      //   path: ROUTER.GIO_HANG,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <Cart />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
-      // {
-      //   path: ROUTER.THANH_TOAN,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <Checkout />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
-      // {
-      //   path: ROUTER.YEU_THICH,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <Favorites />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
-
-      // // User Routes
-      // {
-      //   path: ROUTER.PROFILE,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <Profile />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
-      // {
-      //   path: ROUTER.ORDERS,
-      //   element: (
-      //     <LazyLoadingComponent>
-      //       <Orders />
-      //     </LazyLoadingComponent>
-      //   ),
-      // },
     ],
   },
+  {
+    element: (
+      <LazyLoadingComponent>
+        <PrivateRouters />
+      </LazyLoadingComponent>
+    ),
+    children: [
+      {
+        path: ROUTER.CHI_TIET_SAN_PHAM,
+        element: (
+          <LazyLoadingComponent>
+            <ProductDetail />
+          </LazyLoadingComponent>
+        ),
+      },
+    ],
+  },
+  {
+    element: (
+      <LazyLoadingComponent>
+        <SellerRoutes />
+      </LazyLoadingComponent>
+    ),
+    children: [
+      {
+        path: "/manager-list",
+        element: (
+          <LazyLoadingComponent>
+            <ManagerList />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: "/create-manager",
+        element: (
+          <LazyLoadingComponent>
+            <CreateManager />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.SELLER_DASHBOARD,
+        element: (
+          <LazyLoadingComponent>
+            <SellerDashboard />
+          </LazyLoadingComponent>
+        ),
+      },
 
-  // Seller routes
-  {
-    path: "/manager-list",
-    element: (
-      <LazyLoadingComponent>
-        <ManagerList />
-      </LazyLoadingComponent>
-    ),
-  },
-  {
-    path: "/create-manager",
-    element: (
-      <LazyLoadingComponent>
-        <CreateManager />
-      </LazyLoadingComponent>
-    ),
-  },
-  {
-    path: ROUTER.SELLER_DASHBOARD,
-    element: (
-      <LazyLoadingComponent>
-        <SellerDashboard />
-      </LazyLoadingComponent>
-    ),
-  },
-  {
-    path: ROUTER.MY_SHOP,
-    element: (
-      <LazyLoadingComponent>
-        <SellerDashboard />
-      </LazyLoadingComponent>
-    ),
+      {
+        path: ROUTER.MY_SHOP,
+        element: (
+          <LazyLoadingComponent>
+            <SellerDashboard />
+          </LazyLoadingComponent>
+        ),
+      },
+    ],
   },
 ];
 

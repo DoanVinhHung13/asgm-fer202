@@ -1,0 +1,93 @@
+.product-filter {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.reset-btn {
+  background: none;
+  border: 1px solid #ee4d2d;
+  color: #ee4d2d;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background: #ee4d2d;
+  color: white;
+}
+
+.filter-section {
+  margin-bottom: 25px;
+}
+
+.filter-section h4 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.filter-option:hover {
+  color: #ee4d2d;
+}
+
+.filter-option input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #ee4d2d;
+}
+
+.filter-option span {
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .product-filter {
+    position: static;
+    margin-bottom: 20px;
+  }
+}
