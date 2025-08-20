@@ -126,52 +126,12 @@ const routes = [
       },
     ],
   },
+  
   {
+    path: "/seller",
     element: (
       <LazyLoadingComponent>
-        <SellerRoutes />
-      </LazyLoadingComponent>
-    ),
-    children: [
-      {
-        path: "/manager-list",
-        element: (
-          <LazyLoadingComponent>
-            <ManagerList />
-          </LazyLoadingComponent>
-        ),
-      },
-      {
-        path: "/create-manager",
-        element: (
-          <LazyLoadingComponent>
-            <CreateManager />
-          </LazyLoadingComponent>
-        ),
-      },
-      {
-        path: ROUTER.SELLER_DASHBOARD,
-        element: (
-          <LazyLoadingComponent>
-            <SellerDashboard />
-          </LazyLoadingComponent>
-        ),
-      },
-
-      {
-        path: ROUTER.MY_SHOP,
-        element: (
-          <LazyLoadingComponent>
-            <SellerDashboard />
-          </LazyLoadingComponent>
-        ),
-      },
-    ],
-  },
-  {
-    element: (
-      <LazyLoadingComponent>
-        <SellerRoutes />
+        <SellerDashboard />
       </LazyLoadingComponent>
     ),
     children: [
@@ -180,44 +140,44 @@ const routes = [
         element: <div className="content-box">Đây là trang Dashboard</div>,
       },
       {
-        path: "tao-nhan-vien",
-        element: (
-          <LazyLoadingComponent>
-            <ManagerList />
-          </LazyLoadingComponent>
-        ),
-      },
-      {
-        path: "tao-nhan-vien/create",
-        element: (
-          <LazyLoadingComponent>
-            <CreateManager />
-          </LazyLoadingComponent>
-        ),
-      },
+      path: "tao-nhan-vien",   
+      element: (
+        <LazyLoadingComponent>
+          <ManagerList />
+        </LazyLoadingComponent>
+      ),
+    },
+    {
+      path: "tao-nhan-vien/create", 
+      element: (
+        <LazyLoadingComponent>
+          <CreateManager />
+        </LazyLoadingComponent>
+      ),
+    },
       {
         path: "quan-ly-don-hang",
         element: (
-          <LazyLoadingComponent>
-            <OrderManagement />
-          </LazyLoadingComponent>
-        ),
+        <LazyLoadingComponent>
+          <OrderManagement />
+        </LazyLoadingComponent>
+      ),
       },
       {
-        path: "tao-san-pham",
-        element: (
-          <LazyLoadingComponent>
-            <ProductManagement />
-          </LazyLoadingComponent>
-        ),
-      },
+      path: "tao-san-pham",   
+      element: (
+        <LazyLoadingComponent>
+          <ProductManagement />
+        </LazyLoadingComponent>
+      ),
+    },
       {
         path: "tao-voucher",
         element: (
-          <LazyLoadingComponent>
-            <VoucherManagement />
-          </LazyLoadingComponent>
-        ),
+        <LazyLoadingComponent>
+          <VoucherManagement />
+        </LazyLoadingComponent>
+      ),
       },
       {
         path: "cai-dat",
@@ -225,7 +185,14 @@ const routes = [
       },
     ],
   },
-
+{
+        path: ROUTER.MY_SHOP,
+        element: (
+          <LazyLoadingComponent>
+            <SellerDashboard />
+          </LazyLoadingComponent>
+        ),
+      },
   //   {
   //     element: (
   //       <LazyLoadingComponent>
