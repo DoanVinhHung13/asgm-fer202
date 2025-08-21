@@ -45,7 +45,6 @@
       "createdAt": "2025-08-17T15:24:13.487Z"
     }
   ],
-
   "orders": [
     {
       "id": "1",
@@ -74,7 +73,7 @@
       },
       "note": "Giao hàng giờ hành chính",
       "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2025-08-17T06:38:34.338Z"
+      "updatedAt": "2025-08-21T06:23:41.550Z"
     },
     {
       "id": "2",
@@ -94,7 +93,7 @@
       "shippingFee": 25000,
       "voucherDiscount": 50000,
       "totalAmount": 374000,
-      "status": "completed",
+      "status": "pending",
       "paymentStatus": "paid",
       "shippingAddress": {
         "name": "Trần Thị B",
@@ -103,7 +102,7 @@
       },
       "note": "",
       "createdAt": "2024-01-16T14:20:00Z",
-      "updatedAt": "2025-08-17T06:38:29.562Z"
+      "updatedAt": "2025-08-21T06:23:36.803Z"
     }
   ],
   "vouchers": [
@@ -154,7 +153,7 @@
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Áo thun nam basic",
       "description": "Áo thun nam chất liệu cotton 100%, form regular fit, phù hợp mặc hàng ngày",
       "price": 199000,
@@ -162,7 +161,10 @@
       "brand": "Nike",
       "gender": "Nam",
       "categoryId": 1,
-      "images": ["/img/ao_thun_1.avif", "/img/ao_thun_1_2.avif"],
+      "images": [
+        "/img/ao_thun_1.avif",
+        "/img/ao_thun_1_2.avif"
+      ],
       "variants": [
         {
           "id": 1,
@@ -220,7 +222,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Quần jeans nam slim",
       "description": "Quần jeans nam form slim, chất liệu denim cao cấp, phù hợp đi làm và đi chơi",
       "price": 450000,
@@ -228,7 +230,9 @@
       "brand": "Adidas",
       "gender": "Nam",
       "categoryId": 2,
-      "images": ["/img/quan_jeans_1.avif"],
+      "images": [
+        "/img/quan_jeans_1.avif"
+      ],
       "variants": [
         {
           "id": 8,
@@ -272,7 +276,7 @@
       "createdAt": "2024-01-15T00:00:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Áo sơ mi nữ công sở",
       "description": "Áo sơ mi nữ form fitted, chất liệu lụa cao cấp, phù hợp đi làm và dự tiệc",
       "price": 320000,
@@ -280,7 +284,9 @@
       "brand": "Puma",
       "gender": "Nữ",
       "categoryId": 1,
-      "images": ["/img/ao_somi_nu_1.avif"],
+      "images": [
+        "/img/ao_somi_nu_1.avif"
+      ],
       "variants": [
         {
           "id": 13,
@@ -324,7 +330,7 @@
       "createdAt": "2024-02-01T00:00:00Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Giày sneaker unisex",
       "description": "Giày sneaker phong cách thể thao, đế cao su chống trượt, phù hợp cả nam và nữ",
       "price": 890000,
@@ -332,7 +338,9 @@
       "brand": "Converse",
       "gender": "Unisex",
       "categoryId": 4,
-      "images": ["/img/giay_sneaker_1.avif"],
+      "images": [
+        "/img/giay_sneaker_1.avif"
+      ],
       "variants": [
         {
           "id": 18,
@@ -383,7 +391,7 @@
       "createdAt": "2024-02-10T00:00:00Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Túi xách nữ mini",
       "description": "Túi xách nữ size mini, thiết kế thời trang, chất liệu da tổng hợp cao cấp",
       "price": 280000,
@@ -391,7 +399,9 @@
       "brand": "Vans",
       "gender": "Nữ",
       "categoryId": 3,
-      "images": ["/img/tui_xach_mini_1.avif"],
+      "images": [
+        "/img/tui_xach_mini_1.avif"
+      ],
       "variants": [
         {
           "id": 24,
@@ -421,7 +431,7 @@
       "createdAt": "2024-02-20T00:00:00Z"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Áo hoodie unisex",
       "description": "Áo hoodie form oversize, chất liệu nỉ cotton ấm áp, phù hợp mùa đông",
       "price": 550000,
@@ -429,7 +439,9 @@
       "brand": "StyleHub",
       "gender": "Unisex",
       "categoryId": 1,
-      "images": ["/img/ao_hoodie_1.avif"],
+      "images": [
+        "/img/ao_hoodie_1.avif"
+      ],
       "variants": [
         {
           "id": 27,
@@ -473,7 +485,7 @@
       "createdAt": "2024-08-15T00:00:00Z"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Quần short thể thao",
       "description": "Quần short thể thao, chất liệu polyester thoáng mát, phù hợp tập gym",
       "price": 180000,
@@ -481,7 +493,9 @@
       "brand": "Nike",
       "gender": "Unisex",
       "categoryId": 2,
-      "images": ["/img/quan_short_1.avif"],
+      "images": [
+        "/img/quan_short_1.avif"
+      ],
       "variants": [
         {
           "id": 32,
@@ -525,7 +539,7 @@
       "createdAt": "2024-08-10T00:00:00Z"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Giày cao gót nữ",
       "description": "Giày cao gót nữ 5cm, chất liệu da mềm, phù hợp đi làm và dự tiệc",
       "price": 650000,
@@ -533,7 +547,9 @@
       "brand": "StyleHub",
       "gender": "Nữ",
       "categoryId": 4,
-      "images": ["/img/giay_cao_got_1.avif"],
+      "images": [
+        "/img/giay_cao_got_1.avif"
+      ],
       "variants": [
         {
           "id": 37,
@@ -577,7 +593,7 @@
       "createdAt": "2024-08-05T00:00:00Z"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Ví nam da thật",
       "description": "Ví nam chất liệu da thật cao cấp, thiết kế tinh tế, nhiều ngăn đựng thẻ",
       "price": 420000,
@@ -585,7 +601,9 @@
       "brand": "StyleHub",
       "gender": "Nam",
       "categoryId": 3,
-      "images": ["/img/vi_nam_1.avif"],
+      "images": [
+        "/img/vi_nam_1.avif"
+      ],
       "variants": [
         {
           "id": 42,
@@ -608,7 +626,7 @@
       "createdAt": "2024-08-01T00:00:00Z"
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Váy nữ dự tiệc",
       "description": "Váy nữ thiết kế thanh lịch, chất liệu chiffon mềm mại, phù hợp dự tiệc",
       "price": 680000,
@@ -616,7 +634,9 @@
       "brand": "Puma",
       "gender": "Nữ",
       "categoryId": 1,
-      "images": ["/img/vay_nu_1.avif"],
+      "images": [
+        "/img/vay_nu_1.avif"
+      ],
       "variants": [
         {
           "id": 44,
@@ -651,29 +671,52 @@
       "reviewCount": 8,
       "status": "active",
       "createdAt": "2024-07-28T00:00:00Z"
+    },
+    {
+      "id": "11",
+      "name": "213123",
+      "description": "12313213",
+      "price": 123123123,
+      "originalPrice": null,
+      "categoryId": null,
+      "images": [
+        "blob:http://localhost:3000/ffe4bff4-8e42-4710-9473-4dfeaa446dac"
+      ],
+      "status": "active",
+      "sellerId": 1,
+      "variants": [
+        {
+          "id": 1755757128606,
+          "color": "dsadas",
+          "size": "sdad",
+          "stock": 212,
+          "sku": "asdad"
+        }
+      ],
+      "createdAt": "2025-08-21T06:18:48.606Z"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Áo",
       "slug": "ao",
       "description": "Các loại áo thời trang"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Quần",
       "slug": "quan",
       "description": "Các loại quần thời trang"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Phụ kiện",
       "slug": "phu-kien",
       "description": "Phụ kiện thời trang"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Giày",
       "slug": "giay",
       "description": "Giày thời trang"

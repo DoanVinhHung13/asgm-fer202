@@ -109,6 +109,7 @@ const routes = [
       },
     ],
   },
+  // Private routes
   {
     element: (
       <LazyLoadingComponent>
@@ -126,58 +127,62 @@ const routes = [
       },
     ],
   },
-  
+  // Seller routes
   {
-    path: "/seller",
+    // path: "/seller",
     element: (
       <LazyLoadingComponent>
-        <SellerDashboard />
+        <SellerRoutes />
       </LazyLoadingComponent>
     ),
     children: [
       {
-        path: "dashboard",
-        element: <div className="content-box">Đây là trang Dashboard</div>,
+        path: ROUTER.SELLER_DASHBOARD,
+        element: (
+          <LazyLoadingComponent>
+            <SellerDashboard />
+          </LazyLoadingComponent>
+        ),
       },
       {
-      path: "tao-nhan-vien",   
-      element: (
-        <LazyLoadingComponent>
-          <ManagerList />
-        </LazyLoadingComponent>
-      ),
-    },
-    {
-      path: "tao-nhan-vien/create", 
-      element: (
-        <LazyLoadingComponent>
-          <CreateManager />
-        </LazyLoadingComponent>
-      ),
-    },
-      {
-        path: "quan-ly-don-hang",
+        path: ROUTER.THEM_SAN_PHAM,
         element: (
-        <LazyLoadingComponent>
-          <OrderManagement />
-        </LazyLoadingComponent>
-      ),
+          <LazyLoadingComponent>
+            <ManagerList />
+          </LazyLoadingComponent>
+        ),
       },
       {
-      path: "tao-san-pham",   
-      element: (
-        <LazyLoadingComponent>
-          <ProductManagement />
-        </LazyLoadingComponent>
-      ),
-    },
-      {
-        path: "tao-voucher",
+        path: ROUTER.QUAN_LY_NHAN_VIEN,
         element: (
-        <LazyLoadingComponent>
-          <VoucherManagement />
-        </LazyLoadingComponent>
-      ),
+          <LazyLoadingComponent>
+            <CreateManager />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.QUAN_LY_DON_HANG,
+        element: (
+          <LazyLoadingComponent>
+            <OrderManagement />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.THEM_SAN_PHAM,
+        element: (
+          <LazyLoadingComponent>
+            <ProductManagement />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.QUAN_LY_VOUCHER,
+        element: (
+          <LazyLoadingComponent>
+            <VoucherManagement />
+          </LazyLoadingComponent>
+        ),
       },
       {
         path: "cai-dat",
@@ -185,139 +190,6 @@ const routes = [
       },
     ],
   },
-{
-        path: ROUTER.MY_SHOP,
-        element: (
-          <LazyLoadingComponent>
-            <SellerDashboard />
-          </LazyLoadingComponent>
-        ),
-      },
-  //   {
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <SellerRoutes />
-  //       </LazyLoadingComponent>
-  //     ),
-  //     children: [
-  //       {
-  //         path: ROUTER.SELLER_DASHBOARD,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <SellerDashboard />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_SAN_PHAM,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <ProductManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.THEM_SAN_PHAM,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <AddProduct />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.SUA_SAN_PHAM,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <EditProduct />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_DON_HANG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <OrderManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.CHI_TIET_DON_HANG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <OrderDetail />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_VOUCHER,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <VoucherManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.THEM_VOUCHER,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <AddVoucher />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.BAO_CAO,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <Reports />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //     ],
-  //   },
-
-  // Admin routes
-  //   {
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <AdminRoutes />
-  //       </LazyLoadingComponent>
-  //     ),
-  //     children: [
-  //       {
-  //         path: ROUTER.ADMIN_DASHBOARD,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <AdminDashboard />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_NGUOI_DUNG,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <UserManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //       {
-  //         path: ROUTER.QUAN_LY_SELLER,
-  //         element: (
-  //           <LazyLoadingComponent>
-  //             <SellerManagement />
-  //           </LazyLoadingComponent>
-  //         ),
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     path: "*",
-  //     element: (
-  //       <LazyLoadingComponent>
-  //         <NotFound />
-  //       </LazyLoadingComponent>
-  //     ),
-  //   },
 ];
 
 const AppRouter = () => {

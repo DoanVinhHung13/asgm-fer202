@@ -43,6 +43,10 @@ const ROUTER = {
   THEM_VOUCHER: "/seller/them-voucher",
   BAO_CAO: "/seller/bao-cao",
 
+  // Employee routes
+  QUAN_LY_NHAN_VIEN: "/employee/quan-ly-nhan-vien",
+  THEM_NHAN_VIEN: "/employee/them-nhan-vien",
+
   // Admin routes
   ADMIN_DASHBOARD: "/admin/dashboard",
   QUAN_LY_NGUOI_DUNG: "/admin/quan-ly-nguoi-dung",

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
 import {
-  ShoppingCartOutlined,
-  InboxOutlined,
-  GiftOutlined,
-  TeamOutlined,
   BarChartOutlined,
-  SettingOutlined,
-  MenuOutlined,
-  CloseOutlined,
   BellOutlined,
-  UserOutlined,
+  CloseOutlined,
+  GiftOutlined,
+  InboxOutlined,
   LogoutOutlined,
+  MenuOutlined,
+  SettingOutlined,
+  ShoppingCartOutlined,
+  TeamOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./SellerDashboard.css";
 
 const SellerDashboard = () => {
@@ -22,17 +22,47 @@ const SellerDashboard = () => {
   const [openMenu, setOpenMenu] = useState(false); // thêm state cho dropdown
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: <BarChartOutlined />, path: "/seller/dashboard" },
-    { id: "orders", label: "Quản lý Đơn hàng", icon: <ShoppingCartOutlined />, path: "/seller/quan-ly-don-hang" },
-    { id: "products", label: "Tạo Sản phẩm", icon: <InboxOutlined />, path: "/seller/tao-san-pham" },
-    { id: "vouchers", label: "Tạo Voucher", icon: <GiftOutlined />, path: "/seller/tao-voucher" },
-    { id: "employees", label: "Tạo Nhân viên", icon: <TeamOutlined />, path: "/seller/tao-nhan-vien" },
-    { id: "settings", label: "Cài đặt", icon: <SettingOutlined />, path: "/seller/cai-dat" },
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: <BarChartOutlined />,
+      path: "/seller/dashboard",
+    },
+    {
+      id: "orders",
+      label: "Quản lý Đơn hàng",
+      icon: <ShoppingCartOutlined />,
+      path: "/seller/quan-ly-don-hang",
+    },
+    {
+      id: "products",
+      label: "Tạo Sản phẩm",
+      icon: <InboxOutlined />,
+      path: "/seller/tao-san-pham",
+    },
+    {
+      id: "vouchers",
+      label: "Tạo Voucher",
+      icon: <GiftOutlined />,
+      path: "/seller/tao-voucher",
+    },
+    {
+      id: "employees",
+      label: "Tạo Nhân viên",
+      icon: <TeamOutlined />,
+      path: "/seller/tao-nhan-vien",
+    },
+    {
+      id: "settings",
+      label: "Cài đặt",
+      icon: <SettingOutlined />,
+      path: "/seller/cai-dat",
+    },
   ];
 
   const handleLogout = () => {
-    localStorage.removeItem("user"); // xoá user/token
-    navigate("/"); // chuyển về login
+    localStorage.removeItem("user");
+    navigate("/");
   };
 
   return (
@@ -50,7 +80,9 @@ const SellerDashboard = () => {
           {menuItems.map((item) => (
             <button
               key={item.id}
-              className={`sidebar-btn ${location.pathname === item.path ? "active" : ""}`}
+              className={`sidebar-btn ${
+                location.pathname === item.path ? "active" : ""
+              }`}
               onClick={() => {
                 navigate(item.path);
                 setSidebarOpen(false);
@@ -73,7 +105,8 @@ const SellerDashboard = () => {
             <MenuOutlined />
           </button>
           <h2>
-            {menuItems.find((item) => location.pathname === item.path)?.label || "Dashboard"}
+            {menuItems.find((item) => location.pathname === item.path)?.label ||
+              "Dashboard"}
           </h2>
 
           {/* Actions */}
