@@ -161,10 +161,7 @@
       "brand": "Nike",
       "gender": "Nam",
       "categoryId": 1,
-      "images": [
-        "/img/ao_thun_1.avif",
-        "/img/ao_thun_1_2.avif"
-      ],
+      "images": ["/img/ao_thun_1.avif", "/img/ao_thun_1_2.avif"],
       "variants": [
         {
           "id": 1,
@@ -230,9 +227,7 @@
       "brand": "Adidas",
       "gender": "Nam",
       "categoryId": 2,
-      "images": [
-        "/img/quan_jeans_1.avif"
-      ],
+      "images": ["/img/quan_jeans_1.avif"],
       "variants": [
         {
           "id": 8,
@@ -284,9 +279,7 @@
       "brand": "Puma",
       "gender": "Nữ",
       "categoryId": 1,
-      "images": [
-        "/img/ao_somi_nu_1.avif"
-      ],
+      "images": ["/img/ao_somi_nu_1.avif"],
       "variants": [
         {
           "id": 13,
@@ -338,9 +331,7 @@
       "brand": "Converse",
       "gender": "Unisex",
       "categoryId": 4,
-      "images": [
-        "/img/giay_sneaker_1.avif"
-      ],
+      "images": ["/img/giay_sneaker_1.avif"],
       "variants": [
         {
           "id": 18,
@@ -399,9 +390,7 @@
       "brand": "Vans",
       "gender": "Nữ",
       "categoryId": 3,
-      "images": [
-        "/img/tui_xach_mini_1.avif"
-      ],
+      "images": ["/img/tui_xach_mini_1.avif"],
       "variants": [
         {
           "id": 24,
@@ -439,9 +428,7 @@
       "brand": "StyleHub",
       "gender": "Unisex",
       "categoryId": 1,
-      "images": [
-        "/img/ao_hoodie_1.avif"
-      ],
+      "images": ["/img/ao_hoodie_1.avif"],
       "variants": [
         {
           "id": 27,
@@ -493,9 +480,7 @@
       "brand": "Nike",
       "gender": "Unisex",
       "categoryId": 2,
-      "images": [
-        "/img/quan_short_1.avif"
-      ],
+      "images": ["/img/quan_short_1.avif"],
       "variants": [
         {
           "id": 32,
@@ -547,9 +532,7 @@
       "brand": "StyleHub",
       "gender": "Nữ",
       "categoryId": 4,
-      "images": [
-        "/img/giay_cao_got_1.avif"
-      ],
+      "images": ["/img/giay_cao_got_1.avif"],
       "variants": [
         {
           "id": 37,
@@ -601,9 +584,7 @@
       "brand": "StyleHub",
       "gender": "Nam",
       "categoryId": 3,
-      "images": [
-        "/img/vi_nam_1.avif"
-      ],
+      "images": ["/img/vi_nam_1.avif"],
       "variants": [
         {
           "id": 42,
@@ -634,9 +615,7 @@
       "brand": "Puma",
       "gender": "Nữ",
       "categoryId": 1,
-      "images": [
-        "/img/vay_nu_1.avif"
-      ],
+      "images": ["/img/vay_nu_1.avif"],
       "variants": [
         {
           "id": 44,
