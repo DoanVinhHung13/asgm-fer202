@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 
 const PublicRouters = () => {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f9f9f9" }}>
       <Header />
       <Layout.Content>
         <Outlet />

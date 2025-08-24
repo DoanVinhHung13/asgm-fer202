@@ -1,16 +1,13 @@
-import { Menu as AntdMenu, Button, Dropdown, Input } from "antd";
-import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Button, Dropdown, Menu } from "antd";
+import { Heart, Menu as MenuIcon, ShoppingBag, User, X } from "lucide-react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext"; // Adjust path as needed
+import { AuthContext } from "../../context/AuthContext";
 import ROUTER from "../../router/ROUTER";
 import "./Header.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -26,322 +23,156 @@ const Header = () => {
     { key: "shoes", label: "Giày", path: "/san-pham?category=giay" },
   ];
 
-  // User menu items based on role
-  const getUserMenuItems = () => {
-    if (!user) return [];
+  const userMenuItems = user
+    ? [
+        {
+          key: "profile",
+          label: "Hồ sơ của tôi",
+          onClick: () => navigate(ROUTER.THONG_TIN_CA_NHAN),
+        },
+        ...(user.role === "seller"
+          ? [
+              {
+                key: "shop",
+                label: "Quản lý cửa hàng",
+                onClick: () => navigate(ROUTER.SELLER_DASHBOARD),
+              },
+            ]
+          : []),
+        {
+          key: "orders",
+          label: "Đơn hàng của tôi",
+          onClick: () => navigate(ROUTER.LICH_SU_DON_HANG),
+        },
+        {
+          key: "logout",
+          label: "Đăng xuất",
+          onClick: () => {
+            logout();
+            navigate(ROUTER.HOME);
+          },
+        },
+      ]
+    : [];
 
-    const baseItems = [
-      { key: "profile", label: "Hồ sơ của tôi", path: "/ho-so" },
-      { key: "orders", label: "Đơn hàng của tôi", path: "/don-hang" },
-    ];
-
-    if (user.role === "seller") {
-      baseItems.splice(1, 0, {
-        key: "shop",
-        label: "My Shop",
-        path: "/my-shop",
-      });
-    }
-
-    baseItems.push({ key: "logout", label: "Đăng xuất", path: null });
-    return baseItems;
-  };
-
-  const handleMenuClick = (item) => {
-    console.log("Menu clicked:", item.key);
-    if (item.path) {
-      navigate(item.path);
-    }
+  const handleNavigation = (path) => {
+    navigate(path);
     setIsMenuOpen(false);
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Search:", searchQuery);
-      // Navigate to search results page with query
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
-
   const handleUserMenuClick = ({ key }) => {
-    setIsUserDropdownOpen(false);
-    const menuItem = getUserMenuItems().find((item) => item.key === key);
-
-    switch (key) {
-      case "profile":
-        navigate("/profile");
-        break;
-      case "orders":
-        navigate("/orders");
-        break;
-      case "shop":
-        navigate("/my-shop");
-        break;
-      case "logout":
-        logout();
-        navigate(ROUTER.HOME);
-        break;
-      default:
-        if (menuItem && menuItem.path) {
-          navigate(menuItem.path);
-        }
-        break;
-    }
+    const item = userMenuItems.find((item) => item.key === key);
+    item?.onClick();
   };
 
-  const handleLoginClick = () => {
-    navigate("/dang-nhap");
+  const handleProtectedAction = (path) => {
+    navigate(user ? path : "/dang-nhap");
   };
-
-  const handleRegisterClick = () => {
-    navigate(ROUTER.DANG_KY);
-  };
-
-  const handleFavoritesClick = () => {
-    if (user) {
-      navigate("/favorites");
-    } else {
-      // Redirect to login if not authenticated
-      navigate("/dang-nhap");
-    }
-  };
-
-  const handleCartClick = () => {
-    if (user) {
-      navigate("/cart");
-    } else {
-      // Redirect to login if not authenticated
-      navigate("/dang-nhap");
-    }
-  };
-
-  const userMenu = (
-    <AntdMenu onClick={handleUserMenuClick}>
-      {getUserMenuItems().map((item) => (
-        <AntdMenu.Item key={item.key}>{item.label}</AntdMenu.Item>
-      ))}
-    </AntdMenu>
-  );
 
   return (
     <header className="header">
       <div className="header-container">
         <div className="header-content">
           {/* Logo */}
-          <div
-            className="logo"
-            onClick={() => navigate(ROUTER.HOME)}
-            style={{ cursor: "pointer" }}
-          >
+          <div className="logo" onClick={() => navigate(ROUTER.HOME)}>
             <h1 className="logo-text">StyleHub</h1>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="desktop-nav">
-            {navItems.map((item) => (
-              <Button
-                key={item.key}
-                type="text"
-                className="nav-button"
-                onClick={() => handleMenuClick(item)}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </nav>
+          <Button
+            type="text"
+            className="menu-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="icon" />
+            ) : (
+              <MenuIcon className="icon" />
+            )}
+          </Button>
 
-          {/* Search Bar - Desktop */}
-          <div className="desktop-search">
-            <Input
-              prefix={<Search className="search-icon" />}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onPressEnter={handleSearch}
-              placeholder="Search for trendy styles..."
-              className="search-input"
-            />
-          </div>
-
-          {/* Action Icons */}
-          <div className="action-icons">
-            {/* Favorites */}
-            <Button
-              type="text"
-              className="action-button"
-              onClick={handleFavoritesClick}
-              title="Favorites"
-            >
-              <Heart className="icon" />
-            </Button>
-
-            {/* Authentication Section */}
-            {user ? (
-              <div>
-                <Dropdown
-                  overlay={userMenu}
-                  trigger={["click"]}
-                  open={isUserDropdownOpen}
-                  onOpenChange={setIsUserDropdownOpen}
+          {/* Navigation Menu */}
+          <div className={`nav-menu ${isMenuOpen ? "nav-menu-open" : ""}`}>
+            <nav className="nav-links">
+              {navItems.map((item) => (
+                <Button
+                  key={item.key}
+                  type="text"
+                  className="nav-button"
+                  onClick={() => handleNavigation(item.path)}
                 >
+                  {item.label}
+                </Button>
+              ))}
+            </nav>
+
+            {/* Action Icons */}
+            <div className="action-icons">
+              {user ? (
+                <>
                   <Button
                     type="text"
                     className="action-button"
-                    title="User Menu"
+                    onClick={() => handleProtectedAction(ROUTER.YEU_THICH)}
+                    title="Yêu thích"
                   >
-                    <User className="icon" />
+                    <Heart className="icon" />
                   </Button>
-                </Dropdown>
-                {/* Shopping Cart */}
-                <Button
-                  type="text"
-                  className="action-button cart-button"
-                  onClick={handleCartClick}
-                  title="Shopping Cart"
-                >
-                  <ShoppingBag className="icon" />
-                  <span className="cart-badge">3</span>
-                </Button>
-              </div>
-            ) : (
-              // Not logged in - Show login/register buttons
-              <div className="auth-buttons">
-                <Button
-                  type="text"
-                  className="auth-button login-button"
-                  onClick={handleLoginClick}
-                >
-                  Đăng nhập
-                </Button>
-                <Button
-                  type="primary"
-                  className="auth-button register-button"
-                  onClick={handleRegisterClick}
-                >
-                  Đăng ký
-                </Button>
-              </div>
-            )}
 
-            {/* Mobile Menu Button */}
-            <Button
-              type="text"
-              className="mobile-menu-button"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <Menu className="icon" />
-            </Button>
+                  <Dropdown
+                    overlay={
+                      <Menu onClick={handleUserMenuClick}>
+                        {userMenuItems.map((item) => (
+                          <Menu.Item key={item.key}>{item.label}</Menu.Item>
+                        ))}
+                      </Menu>
+                    }
+                    trigger={["click"]}
+                    placement="bottomRight"
+                  >
+                    <Button type="text" className="action-button">
+                      <User className="icon" />
+                    </Button>
+                  </Dropdown>
+
+                  <Button
+                    type="text"
+                    className="action-button cart-button"
+                    onClick={() => handleProtectedAction(ROUTER.GIO_HANG)}
+                    title="Giỏ hàng"
+                  >
+                    <ShoppingBag className="icon" />
+                  </Button>
+                </>
+              ) : (
+                <div className="auth-buttons">
+                  <Button
+                    type="text"
+                    className="auth-button login-button"
+                    onClick={() => navigate("/dang-nhap")}
+                  >
+                    Đăng nhập
+                  </Button>
+                  <Button
+                    type="primary"
+                    className="auth-button register-button"
+                    onClick={() => navigate(ROUTER.DANG_KY)}
+                  >
+                    Đăng ký
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Overlay for mobile menu */}
+          {isMenuOpen && (
+            <div
+              className="menu-overlay"
+              onClick={() => setIsMenuOpen(false)}
+            />
+          )}
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          <div
-            className="mobile-menu-overlay"
-            onClick={() => setIsMenuOpen(false)}
-          ></div>
-          <div className="mobile-menu-content">
-            <div className="mobile-menu-header">
-              <h2 className="mobile-menu-title">Menu</h2>
-              <Button
-                type="text"
-                className="mobile-menu-close"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <X className="icon" />
-              </Button>
-            </div>
-
-            <div className="mobile-menu-body">
-              {/* Mobile Search */}
-              <div className="mobile-search">
-                <Input
-                  prefix={<Search className="search-icon" />}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onPressEnter={handleSearch}
-                  placeholder="Search for trendy styles..."
-                  className="search-input"
-                />
-              </div>
-
-              {/* Mobile Navigation */}
-              <nav className="mobile-nav">
-                {navItems.map((item) => (
-                  <Button
-                    key={item.key}
-                    type="text"
-                    className="mobile-nav-button"
-                    onClick={() => handleMenuClick(item)}
-                  >
-                    {item.label}
-                  </Button>
-                ))}
-              </nav>
-
-              {/* Mobile User Actions */}
-              <div className="mobile-user-actions">
-                <Button
-                  type="text"
-                  className="mobile-action-button"
-                  onClick={handleFavoritesClick}
-                >
-                  <Heart className="icon" />
-                  Favorites
-                </Button>
-
-                {user ? (
-                  // Logged in mobile view
-                  <>
-                    {getUserMenuItems().map((item) => (
-                      <Button
-                        key={item.key}
-                        type="text"
-                        className="mobile-action-button"
-                        onClick={() => handleUserMenuClick({ key: item.key })}
-                      >
-                        <User className="icon" />
-                        {item.label}
-                      </Button>
-                    ))}
-                    {/* Mobile Cart Button */}
-                    <Button
-                      type="text"
-                      className="mobile-action-button"
-                      onClick={handleCartClick}
-                    >
-                      <ShoppingBag className="icon" />
-                      Shopping Cart
-                      <span className="cart-badge">3</span>
-                    </Button>
-                  </>
-                ) : (
-                  // Not logged in mobile view
-                  <div className="mobile-auth-buttons">
-                    <Button
-                      type="text"
-                      className="mobile-action-button"
-                      onClick={handleLoginClick}
-                    >
-                      <User className="icon" />
-                      Đăng nhập
-                    </Button>
-                    <Button
-                      type="primary"
-                      className="mobile-action-button register-button"
-                      onClick={handleRegisterClick}
-                    >
-                      Đăng ký
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 };

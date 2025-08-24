@@ -11,6 +11,11 @@ const ProductDetail = () => {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [loadingFavourite, setLoadingFavourite] = useState(false);
+
+  // ... (giữ nguyên các useEffect và functions khác)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -23,6 +28,9 @@ const ProductDetail = () => {
           console.log("productData", productData);
           setProduct(productData);
           setSelectedVariant(productData.variants[0]);
+
+          // Check if product is in favourites
+          await checkFavouriteStatus(productData.id);
         } else {
           // navigate("/404");
         }
@@ -40,8 +48,7 @@ const ProductDetail = () => {
   }, [id, navigate]);
 
   const handleBack = () => {
-    const params = searchParams.toString();
-    navigate(params ? `/?${params}` : "/");
+    navigate(-1);
   };
 
   const formatPrice = (price) => {
@@ -61,7 +68,7 @@ const ProductDetail = () => {
   };
 
   const renderRating = () => {
-    if (!product) return null;
+    if (!product || !product.rating) return null;
 
     const stars = [];
     const fullStars = Math.floor(product.rating);
@@ -96,10 +103,12 @@ const ProductDetail = () => {
   const handleColorChange = (color) => {
     const availableSizes = getSizesForColor(color);
     setSelectedVariant(availableSizes[0]);
+    setQuantity(1);
   };
 
   const handleSizeChange = (variant) => {
     setSelectedVariant(variant);
+    setQuantity(1);
   };
 
   const handleQuantityChange = (change) => {
@@ -110,13 +119,170 @@ const ProductDetail = () => {
     }
   };
 
-  const handleAddToCart = () => {
-    if (!selectedVariant) return;
-    // Add to cart logic here
-    alert(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+  const getCustomerId = () => {
+    return parseInt(localStorage.getItem("customerId")) || 1;
   };
 
-  // Update page title
+  const checkFavouriteStatus = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:9000/favourites?customerId=${getCustomerId()}&productId=${productId}`
+      );
+      if (response.ok) {
+        const favouriteData = await response.json();
+        setIsFavourite(favouriteData.length > 0);
+      }
+    } catch (error) {
+      console.error("Error checking favourite status:", error);
+    }
+  };
+
+  const handleFavouriteToggle = async () => {
+    if (!product || loadingFavourite) return;
+
+    const productId = parseInt(product.id);
+    const customerId = getCustomerId();
+
+    setLoadingFavourite(true);
+
+    try {
+      if (isFavourite) {
+        const favouriteResponse = await fetch(
+          `http://localhost:9000/favourites?customerId=${customerId}&productId=${productId}`
+        );
+        const existingFavourites = await favouriteResponse.json();
+
+        if (existingFavourites.length > 0) {
+          const deleteResponse = await fetch(
+            `http://localhost:9000/favourites/${existingFavourites[0].id}`,
+            {
+              method: "DELETE",
+            }
+          );
+
+          if (deleteResponse.ok) {
+            setIsFavourite(false);
+          }
+        }
+      } else {
+        const favouriteItem = {
+          customerId,
+          productId,
+          addedAt: new Date().toISOString(),
+          productName: product.name,
+          productImage: product.images[0],
+          productPrice: product.price,
+          originalPrice: product.originalPrice,
+          brand: product.brand,
+        };
+
+        const response = await fetch("http://localhost:9000/favourites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(favouriteItem),
+        });
+
+        if (response.ok) {
+          setIsFavourite(true);
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling favourite:", error);
+      alert("Có lỗi xảy ra. Vui lòng thử lại.");
+    } finally {
+      setLoadingFavourite(false);
+    }
+  };
+
+  const handleAddToCart = async () => {
+    if (!selectedVariant || selectedVariant.stock === 0 || addingToCart) return;
+
+    setAddingToCart(true);
+    try {
+      const cartResponse = await fetch(
+        `http://localhost:9000/cart?productId=${product.id}&variantId=${
+          selectedVariant.id
+        }&customerId=${getCustomerId()}`
+      );
+      const existingCartItems = await cartResponse.json();
+
+      if (existingCartItems.length > 0) {
+        const existingItem = existingCartItems[0];
+        const newQuantity = existingItem.quantity + quantity;
+
+        if (newQuantity > selectedVariant.stock) {
+          alert(
+            `Chỉ còn ${selectedVariant.stock} sản phẩm trong kho. Bạn đã có ${existingItem.quantity} sản phẩm trong giỏ hàng.`
+          );
+          return;
+        }
+
+        const updateResponse = await fetch(
+          `http://localhost:9000/cart/${existingItem.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              quantity: newQuantity,
+              updatedAt: new Date().toISOString(),
+            }),
+          }
+        );
+
+        if (updateResponse.ok) {
+          alert(
+            `Đã cập nhật số lượng sản phẩm trong giỏ hàng! (Tổng: ${newQuantity})`
+          );
+        } else {
+          throw new Error("Không thể cập nhật giỏ hàng");
+        }
+      } else {
+        const cartItem = {
+          customerId: getCustomerId(),
+          productId: parseInt(product.id),
+          variantId: selectedVariant.id,
+          quantity: quantity,
+          addedAt: new Date().toISOString(),
+          productName: product.name,
+          productImage: product.images[0],
+          productPrice: product.price,
+          variantColor: selectedVariant.color,
+          variantSize: selectedVariant.size,
+          variantSku: selectedVariant.sku,
+        };
+
+        const response = await fetch("http://localhost:9000/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cartItem),
+        });
+
+        if (response.ok) {
+          alert(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+        } else {
+          throw new Error("Không thể thêm vào giỏ hàng");
+        }
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
+    } finally {
+      setAddingToCart(false);
+    }
+  };
+
+  const handleBuyNow = async () => {
+    if (!selectedVariant || selectedVariant.stock === 0) return;
+    await handleAddToCart();
+    navigate("/checkout");
+  };
+
   useEffect(() => {
     if (product) {
       document.title = `${product.name} - Shop`;
@@ -204,16 +370,66 @@ const ProductDetail = () => {
           {/* Product Info */}
           <div className="col-md-6">
             <div className="product-detail-info">
-              <div className="product-brand">{product.brand}</div>
+              {/* Brand và Favourite với Flexbox */}
+              <div className="brand-favourite-wrapper">
+                {product.brand && (
+                  <div className="product-brand">{product.brand}</div>
+                )}
+                <button
+                  className={`favourite-btn-icon ${
+                    isFavourite ? "favourite-active" : ""
+                  }`}
+                  onClick={handleFavouriteToggle}
+                  disabled={loadingFavourite}
+                  title={
+                    isFavourite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích"
+                  }
+                >
+                  {loadingFavourite ? (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      className="loading-spinner-svg"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeDasharray="31.4 31.4"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill={isFavourite ? "red" : "none"}
+                      stroke={isFavourite ? "red" : "currentColor"}
+                      strokeWidth="2"
+                    >
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                  )}
+                </button>
+              </div>
+
               <h1 className="product-title">{product.name}</h1>
 
-              <div className="product-rating-detail">
-                <div className="stars">{renderRating()}</div>
-                <span className="rating-number">{product.rating}</span>
-                <span className="review-count">
-                  ({product.reviewCount} đánh giá)
-                </span>
-              </div>
+              {product.rating && (
+                <div className="product-rating-detail">
+                  <div className="stars">{renderRating()}</div>
+                  <span className="rating-number">{product.rating}</span>
+                  {product.reviewCount && (
+                    <span className="review-count">
+                      ({product.reviewCount} đánh giá)
+                    </span>
+                  )}
+                </div>
+              )}
 
               <div className="product-price-detail">
                 <span className="current-price">
@@ -226,27 +442,31 @@ const ProductDetail = () => {
                 )}
               </div>
 
-              <div className="product-description">
-                <p>{product.description}</p>
-              </div>
+              {product.description && (
+                <div className="product-description">
+                  <p>{product.description}</p>
+                </div>
+              )}
 
               {/* Color Selection */}
-              <div className="variant-section">
-                <h4>Màu sắc:</h4>
-                <div className="color-options">
-                  {getUniqueColors().map((color) => (
-                    <button
-                      key={color}
-                      className={`color-btn ${
-                        selectedVariant?.color === color ? "active" : ""
-                      }`}
-                      onClick={() => handleColorChange(color)}
-                    >
-                      {color}
-                    </button>
-                  ))}
+              {getUniqueColors().length > 1 && (
+                <div className="variant-section">
+                  <h4>Màu sắc:</h4>
+                  <div className="color-options">
+                    {getUniqueColors().map((color) => (
+                      <button
+                        key={color}
+                        className={`color-btn ${
+                          selectedVariant?.color === color ? "active" : ""
+                        }`}
+                        onClick={() => handleColorChange(color)}
+                      >
+                        {color}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Size Selection */}
               {selectedVariant && (
@@ -308,14 +528,23 @@ const ProductDetail = () => {
                 <button
                   className="add-to-cart-btn"
                   onClick={handleAddToCart}
-                  disabled={!selectedVariant || selectedVariant.stock === 0}
+                  disabled={
+                    !selectedVariant ||
+                    selectedVariant.stock === 0 ||
+                    addingToCart
+                  }
                 >
                   <i className="fas fa-shopping-cart"></i>
-                  Thêm vào giỏ hàng
+                  {addingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
                 </button>
                 <button
                   className="buy-now-btn"
-                  disabled={!selectedVariant || selectedVariant.stock === 0}
+                  onClick={handleBuyNow}
+                  disabled={
+                    !selectedVariant ||
+                    selectedVariant.stock === 0 ||
+                    addingToCart
+                  }
                 >
                   Mua ngay
                 </button>
@@ -328,14 +557,20 @@ const ProductDetail = () => {
                     <span className="meta-label">SKU:</span>
                     <span className="meta-value">{selectedVariant.sku}</span>
                   </div>
-                  <div className="meta-item">
-                    <span className="meta-label">Danh mục:</span>
-                    <span className="meta-value">ID {product.categoryId}</span>
-                  </div>
-                  <div className="meta-item">
-                    <span className="meta-label">Giới tính:</span>
-                    <span className="meta-value">{product.gender}</span>
-                  </div>
+                  {product.categoryId && (
+                    <div className="meta-item">
+                      <span className="meta-label">Danh mục:</span>
+                      <span className="meta-value">
+                        ID {product.categoryId}
+                      </span>
+                    </div>
+                  )}
+                  {product.gender && (
+                    <div className="meta-item">
+                      <span className="meta-label">Giới tính:</span>
+                      <span className="meta-value">{product.gender}</span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

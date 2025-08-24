@@ -143,12 +143,61 @@
   ],
   "cart": [
     {
-      "id": "1",
-      "customerId": 2,
+      "id": 1,
+      "customerId": 1,
       "productId": 1,
       "variantId": 1,
+      "quantity": 2,
+      "addedAt": "2024-01-17T09:00:00Z",
+      "updatedAt": "2024-01-17T10:30:00Z",
+      "productName": "Áo thun nam basic",
+      "productImage": "/img/ao_thun_1.avif",
+      "productPrice": 199000,
+      "variantColor": "Đỏ",
+      "variantSize": "M",
+      "variantSku": "AT001-RED-M"
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "productId": 4,
+      "variantId": 18,
       "quantity": 1,
-      "addedAt": "2024-01-17T09:00:00Z"
+      "addedAt": "2024-01-17T11:00:00Z",
+      "productName": "Giày sneaker unisex",
+      "productImage": "/img/giay_sneaker_1.avif",
+      "productPrice": 890000,
+      "variantColor": "Trắng",
+      "variantSize": "38",
+      "variantSku": "GS001-WHITE-38"
+    },
+    {
+      "id": 3,
+      "customerId": 2,
+      "productId": 3,
+      "variantId": 13,
+      "quantity": 1,
+      "addedAt": "2024-01-17T12:00:00Z",
+      "productName": "Áo sơ mi nữ công sở",
+      "productImage": "/img/ao_somi_nu_1.avif",
+      "productPrice": 320000,
+      "variantColor": "Trắng",
+      "variantSize": "S",
+      "variantSku": "ASM001-WHITE-S"
+    },
+    {
+      "id": "9a2c",
+      "customerId": 1,
+      "productId": 6,
+      "variantId": 29,
+      "quantity": 1,
+      "addedAt": "2025-08-24T14:13:01.262Z",
+      "productName": "Áo hoodie unisex",
+      "productImage": "/img/ao_hoodie_1.avif",
+      "productPrice": 550000,
+      "variantColor": "Đen",
+      "variantSize": "M",
+      "variantSku": "AH001-BLACK-M"
     }
   ],
   "products": [
@@ -720,6 +769,41 @@
       "name": "Giày",
       "slug": "giay",
       "description": "Giày thời trang"
+    }
+  ],
+  "favourites": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "productId": 1,
+      "addedAt": "2024-01-17T09:00:00Z",
+      "productName": "Áo thun nam basic",
+      "productImage": "/img/ao_thun_1.avif",
+      "productPrice": 199000,
+      "originalPrice": 250000,
+      "brand": "Nike"
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "productId": 4,
+      "addedAt": "2024-01-17T10:00:00Z",
+      "productName": "Giày sneaker unisex",
+      "productImage": "/img/giay_sneaker_1.avif",
+      "productPrice": 890000,
+      "originalPrice": null,
+      "brand": "Converse"
+    },
+    {
+      "id": 3,
+      "customerId": 2,
+      "productId": 3,
+      "addedAt": "2024-01-17T11:00:00Z",
+      "productName": "Áo sơ mi nữ công sở",
+      "productImage": "/img/ao_somi_nu_1.avif",
+      "productPrice": 320000,
+      "originalPrice": 400000,
+      "brand": "Puma"
     }
   ]
 }
