@@ -154,12 +154,17 @@ const Profile = () => {
           <Spin tip="Đang tải..." />
         ) : (
           <>
+            {successMessage && (
+              <div className="success-message">{successMessage}</div>
+            )}
+
             <Form
               form={form}
               layout="vertical"
               onFinish={onFinish}
               initialValues={{ name: "", email: "", phone: "", address: "" }}
             >
+              {/* ... các Form.Item ... */}
               <Form.Item
                 label="Tên"
                 name="name"
@@ -193,24 +198,12 @@ const Profile = () => {
                   htmlType="submit"
                   block
                   loading={loading}
+                  className="save-btn"
                 >
-                  Lưu thay đổi
+                  Cập nhật
                 </Button>
               </Form.Item>
             </Form>
-
-            {successMessage && (
-              <div
-                style={{
-                  color: "green",
-                  marginTop: 10,
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                {successMessage}
-              </div>
-            )}
           </>
         )}
       </div>

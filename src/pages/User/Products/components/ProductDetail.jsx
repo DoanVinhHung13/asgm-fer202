@@ -196,7 +196,7 @@ const ProductDetail = () => {
     }
   };
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (isBuyNow = false) => {
     if (!selectedVariant || selectedVariant.stock === 0 || addingToCart) return;
 
     setAddingToCart(true);
@@ -213,9 +213,11 @@ const ProductDetail = () => {
         const newQuantity = existingItem.quantity + quantity;
 
         if (newQuantity > selectedVariant.stock) {
-          alert(
-            `Chỉ còn ${selectedVariant.stock} sản phẩm trong kho. Bạn đã có ${existingItem.quantity} sản phẩm trong giỏ hàng.`
-          );
+          if (!isBuyNow) {
+            alert(
+              `Chỉ còn ${selectedVariant.stock} sản phẩm trong kho. Bạn đã có ${existingItem.quantity} sản phẩm trong giỏ hàng.`
+            );
+          }
           return;
         }
 
@@ -234,11 +236,15 @@ const ProductDetail = () => {
         );
 
         if (updateResponse.ok) {
-          alert(
-            `Đã cập nhật số lượng sản phẩm trong giỏ hàng! (Tổng: ${newQuantity})`
-          );
+          if (!isBuyNow) {
+            alert(
+              `Đã cập nhật số lượng sản phẩm trong giỏ hàng! (Tổng: ${newQuantity})`
+            );
+          }
         } else {
-          throw new Error("Không thể cập nhật giỏ hàng");
+          if (!isBuyNow) {
+            throw new Error("Không thể cập nhật giỏ hàng");
+          }
         }
       } else {
         const cartItem = {
@@ -264,14 +270,22 @@ const ProductDetail = () => {
         });
 
         if (response.ok) {
-          alert(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+          if (!isBuyNow) {
+            alert(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+          }
         } else {
-          throw new Error("Không thể thêm vào giỏ hàng");
+          if (!isBuyNow) {
+            throw new Error("Không thể thêm vào giỏ hàng");
+          }
         }
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
-      alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
+      if (!isBuyNow) {
+        alert(
+          "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại."
+        );
+      }
     } finally {
       setAddingToCart(false);
     }
@@ -279,8 +293,8 @@ const ProductDetail = () => {
 
   const handleBuyNow = async () => {
     if (!selectedVariant || selectedVariant.stock === 0) return;
-    await handleAddToCart();
-    navigate("/checkout");
+    await handleAddToCart(true); // truyền true để không hiện alert
+    navigate("/gio-hang"); // chuyển đến trang giỏ hàng
   };
 
   useEffect(() => {

@@ -132,3 +132,47 @@
 .avatar-upload-btn:hover {
   background-color: #1e40af;
 }
+
+.success-message {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(21, 87, 36, 0.2);
+}
+
+.save-btn {
+  background-color: #1890ff;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 12px 0;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover,
+.save-btn:focus {
+  background-color: #40a9ff;
+  box-shadow: 0 0 8px rgba(24, 144, 255, 0.7);
+}
+
+.save-btn {
+  background-color: #28a745;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 12px 0;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover,
+.save-btn:focus {
+  background-color: #5cd65c;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
+}

@@ -41,7 +41,7 @@ const Header = () => {
           : []),
         {
           key: "orders",
-          label: "Đơn hàng của tôi",
+          label: "Lịch sử đơn hàng",
           onClick: () => navigate(ROUTER.LICH_SU_DON_HANG),
         },
         {

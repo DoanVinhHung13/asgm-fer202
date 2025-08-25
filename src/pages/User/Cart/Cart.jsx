@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
+import ROUTER from "../../../router/ROUTER";
 
 const Cart = () => {
-  // State lưu danh sách sản phẩm trong giỏ hàng
-  const [cartItems, setCartItems] = useState([]);
-  // State hiển thị loading khi đang lấy dữ liệu
-  const [loading, setLoading] = useState(true);
-  // State lưu id sản phẩm đang được cập nhật (để disable nút khi chờ phản hồi)
-  const [updatingItemId, setUpdatingItemId] = useState(null);
+  const [cartItems, setCartItems] = useState([]); // Giỏ hàng
+  const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
+  const [updatingItemId, setUpdatingItemId] = useState(null); // Đang cập nhật số lượng
+
+  // Form thông tin giao hàng
+  const [recipientName, setRecipientName] = useState("");
+  const [recipientPhone, setRecipientPhone] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
 
   const navigate = useNavigate();
 
-  // Hàm lấy customerId từ localStorage (hoặc mặc định 1)
-  const getCustomerId = () => {
-    return parseInt(localStorage.getItem("customerId")) || 1;
-  };
+  // Lấy customerId từ localStorage
+  const getCustomerId = () => parseInt(localStorage.getItem("customerId")) || 1;
 
-  // Khi component mount, gọi API để lấy danh sách sản phẩm trong giỏ hàng
+  // Gọi API lấy danh sách giỏ hàng
   useEffect(() => {
     const fetchCartItems = async () => {
       setLoading(true);
@@ -27,30 +28,28 @@ const Cart = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setCartItems(data); // Lưu dữ liệu lấy được vào state
+          setCartItems(data);
         } else {
-          alert("Lỗi khi lấy dữ liệu giỏ hàng.");
+          alert("Không thể lấy giỏ hàng.");
         }
       } catch (error) {
-        console.error("Error fetching cart:", error);
-        alert("Lỗi kết nối server.");
+        console.error("Lỗi khi gọi API:", error);
       } finally {
-        setLoading(false); // Ẩn loading dù thành công hay lỗi
+        setLoading(false);
       }
     };
 
     fetchCartItems();
   }, []);
 
-  // Hàm format giá tiền theo định dạng VND
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("vi-VN", {
+  // Định dạng giá VND
+  const formatPrice = (price) =>
+    new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
     }).format(price);
-  };
 
-  // Hàm xử lý tăng/giảm số lượng sản phẩm trong giỏ hàng
+  // Tăng/giảm số lượng sản phẩm
   const handleQuantityChange = async (
     itemId,
     currentQuantity,
@@ -58,13 +57,11 @@ const Cart = () => {
     stock
   ) => {
     const newQuantity = currentQuantity + change;
-    // Không cho số lượng < 1 hoặc vượt quá tồn kho
     if (newQuantity < 1 || newQuantity > stock) return;
 
-    setUpdatingItemId(itemId); // Đánh dấu item đang được cập nhật (disable nút)
+    setUpdatingItemId(itemId);
 
     try {
-      // Gửi request cập nhật số lượng lên backend
       const response = await fetch(`http://localhost:9000/cart/${itemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -75,70 +72,104 @@ const Cart = () => {
       });
 
       if (response.ok) {
-        // Cập nhật lại state để UI tự động render lại
-        setCartItems((prevItems) =>
-          prevItems.map((item) =>
+        setCartItems((prev) =>
+          prev.map((item) =>
             item.id === itemId ? { ...item, quantity: newQuantity } : item
           )
         );
       } else {
-        alert("Không thể cập nhật số lượng");
+        alert("Không cập nhật được số lượng.");
       }
     } catch (error) {
-      console.error("Error updating cart item:", error);
-      alert("Có lỗi xảy ra khi cập nhật số lượng.");
+      console.error("Lỗi cập nhật:", error);
     } finally {
-      setUpdatingItemId(null); // Bỏ đánh dấu đang cập nhật
+      setUpdatingItemId(null);
     }
   };
 
-  // Hàm xử lý xóa sản phẩm khỏi giỏ hàng
+  // Xóa sản phẩm khỏi giỏ
   const handleRemoveItem = async (itemId) => {
-    // Hiển thị popup xác nhận xóa
-    if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?"))
-      return;
+    if (!window.confirm("Xóa sản phẩm này?")) return;
 
     try {
-      // Gửi request xóa sản phẩm trên backend
       const response = await fetch(`http://localhost:9000/cart/${itemId}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
-        // Cập nhật lại state loại bỏ sản phẩm
-        setCartItems((prevItems) =>
-          prevItems.filter((item) => item.id !== itemId)
-        );
+        setCartItems((prev) => prev.filter((item) => item.id !== itemId));
       } else {
-        alert("Không thể xóa sản phẩm");
+        alert("Không thể xóa sản phẩm.");
       }
     } catch (error) {
-      console.error("Error deleting cart item:", error);
-      alert("Có lỗi xảy ra khi xóa sản phẩm.");
+      console.error("Lỗi xóa sản phẩm:", error);
     }
   };
 
-  // Tính tổng tiền của tất cả sản phẩm trong giỏ hàng
+  // Tổng tiền
   const totalAmount = cartItems.reduce(
     (sum, item) => sum + item.productPrice * item.quantity,
     0
   );
 
-  // Hiển thị loading khi đang gọi API lấy dữ liệu giỏ hàng
+  // Hàm xử lý thanh toán
+  const handleCheckout = async () => {
+    if (!recipientName || !recipientPhone || !shippingAddress) {
+      alert("Vui lòng nhập đầy đủ thông tin giao hàng.");
+      return;
+    }
+
+    if (!window.confirm("Bạn có chắc muốn thanh toán đơn hàng này?")) return;
+
+    try {
+      // Tạo đơn hàng
+      const orderResponse = await fetch("http://localhost:9000/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerId: getCustomerId(),
+          items: cartItems,
+          recipientName,
+          recipientPhone,
+          shippingAddress,
+          total: totalAmount,
+          status: "pending", // Trạng thái chờ xử lý
+          createdAt: new Date().toISOString(),
+        }),
+      });
+
+      if (orderResponse.ok) {
+        // Xoá giỏ hàng từng item
+        await Promise.all(
+          cartItems.map((item) =>
+            fetch(`http://localhost:9000/cart/${item.id}`, { method: "DELETE" })
+          )
+        );
+
+        alert("Thanh toán thành công. Đơn hàng đang chờ xử lý.");
+        navigate(ROUTER.HOME); // Điều hướng tới trang đơn hàng
+      } else {
+        alert("Không thể thanh toán.");
+      }
+    } catch (error) {
+      console.error("Lỗi thanh toán:", error);
+    }
+  };
+
+  // Hiển thị khi đang loading
   if (loading) {
     return (
       <div className="cart-loading">
-        <div className="loading-spinner"></div>
         <p>Đang tải giỏ hàng...</p>
       </div>
     );
   }
 
-  // Nếu giỏ hàng trống, hiện thông báo và nút quay lại cửa hàng
+  // Nếu giỏ hàng trống
   if (cartItems.length === 0) {
     return (
       <div className="cart-empty">
-        <h2>Giỏ hàng của bạn đang trống</h2>
+        <h2>Giỏ hàng trống</h2>
         <button className="back-to-shop-btn" onClick={() => navigate("/")}>
           Quay lại cửa hàng
         </button>
@@ -146,24 +177,20 @@ const Cart = () => {
     );
   }
 
-  // Hiển thị danh sách sản phẩm trong giỏ hàng
   return (
     <div className="cart-container">
       <h1>Giỏ hàng của bạn</h1>
+
       <div className="cart-items">
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
-            <img
-              src={item.productImage}
-              alt={item.productName}
-              className="cart-item-image"
-            />
+            <img src={item.productImage} alt={item.productName} />
             <div className="cart-item-info">
               <h3>{item.productName}</h3>
               <p>Màu: {item.variantColor}</p>
               <p>Kích thước: {item.variantSize}</p>
-              <p>SKU: {item.variantSku}</p>
               <p>Đơn giá: {formatPrice(item.productPrice)}</p>
+
               <div className="quantity-controls">
                 <button
                   onClick={() =>
@@ -193,6 +220,7 @@ const Cart = () => {
                   +
                 </button>
               </div>
+
               <button
                 className="remove-item-btn"
                 onClick={() => handleRemoveItem(item.id)}
@@ -201,6 +229,7 @@ const Cart = () => {
                 Xóa
               </button>
             </div>
+
             <div className="cart-item-total">
               <strong>{formatPrice(item.productPrice * item.quantity)}</strong>
             </div>
@@ -208,10 +237,31 @@ const Cart = () => {
         ))}
       </div>
 
-      {/* Tổng tiền và nút Thanh toán */}
+      {/* Form nhập thông tin giao hàng */}
+      <div className="checkout-info">
+        <h2>Thông tin giao hàng</h2>
+        <input
+          type="text"
+          placeholder="Tên người nhận"
+          value={recipientName}
+          onChange={(e) => setRecipientName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Số điện thoại"
+          value={recipientPhone}
+          onChange={(e) => setRecipientPhone(e.target.value)}
+        />
+        <textarea
+          placeholder="Địa chỉ giao hàng"
+          value={shippingAddress}
+          onChange={(e) => setShippingAddress(e.target.value)}
+        />
+      </div>
+
       <div className="cart-summary">
         <h2>Tổng thanh toán: {formatPrice(totalAmount)}</h2>
-        <button className="checkout-btn" onClick={() => navigate("/checkout")}>
+        <button className="checkout-btn" onClick={handleCheckout}>
           Thanh toán
         </button>
       </div>

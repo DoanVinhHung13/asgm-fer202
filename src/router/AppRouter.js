@@ -25,7 +25,7 @@ const SellerRoutes = React.lazy(() =>
 );
 
 const OrderHistory = React.lazy(() =>
-  import("../pages/User/OrderHistory/OderHistory")
+  import("../pages/User/OrderHistory/OrderHistory")
 );
 const Cart = React.lazy(() => import("../pages/User/Cart/Cart"));
 
