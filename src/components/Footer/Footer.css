@@ -101,6 +101,11 @@
   display: flex;
   flex-direction: column;
 }
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding-left: 0 !important;
+}
 
 .footer-heading {
   font-size: 1.125rem;
@@ -127,12 +132,31 @@
 }
 
 .footer-bottom {
-  border-top: 1px solid #334155;
-  padding-top: var(--spacing-8);
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--spacing-4);
+  padding: 10px 20px;
+  border-top: 1px solid #333;
+  font-size: 14px;
+  color: #707072;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social a {
+  color: #707072;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+}
+
+.footer-social a:not(:last-child)::after {
+  content: "|"; /* thêm gạch đứng */
+  margin-left: 15px;
+  color: #707072;
 }
 
 @media (min-width: 768px) {

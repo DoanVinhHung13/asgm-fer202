@@ -13,6 +13,8 @@ const ProductList = React.lazy(() =>
   import("../pages/User/Products/ProductList")
 );
 
+// const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
+
 // Private Pages
 const PrivateRouters = React.lazy(() =>
   import("../pages/SUPPORTPAGES/PrivateRouters")
@@ -21,6 +23,19 @@ const PrivateRouters = React.lazy(() =>
 const SellerRoutes = React.lazy(() =>
   import("../pages/SUPPORTPAGES/SellerRoutes")
 );
+
+const OrderHistory = React.lazy(() =>
+  import("../pages/User/OrderHistory/OderHistory")
+);
+const Cart = React.lazy(() => import("../pages/User/Cart/Cart"));
+
+const ProductDetail = React.lazy(() =>
+  import("../pages/User/Products/components/ProductDetail")
+);
+
+const Profile = React.lazy(() => import("../pages/User/Profile/Profile"));
+
+const Favorites = React.lazy(() => import("../pages/User/Favorites/Favorites"));
 
 //Seller
 const SellerDashboard = React.lazy(() =>
@@ -41,23 +56,6 @@ const OrderManagement = React.lazy(() =>
 const VoucherManagement = React.lazy(() =>
   import("../pages/Sellers/Vouchers/VoucherManagement")
 );
-// const Register = React.lazy(() => import("src/pages/ANONYMOUS/Register"));
-
-// // Customer
-// const ProductList = React.lazy(() => import("src/pages/CUSTOMER/ProductList"));
-// Product Pages
-
-const ProductDetail = React.lazy(() =>
-  import("../pages/User/Products/components/ProductDetail")
-);
-// const Cart = React.lazy(() => import("../pages/User/Cart"));
-
-// const Orders = React.lazy(() => import("../pages/User/Orders"));
-// const Favorites = React.lazy(() => import("../pages/Shopping/Favorites"));
-
-// // User Pages
-// const Profile = React.lazy(() => import("../pages/User/Profile"));
-// const Orders = React.lazy(() => import("../pages/User/Orders"));
 
 function LazyLoadingComponent({ children }) {
   return (
@@ -125,11 +123,42 @@ const routes = [
           </LazyLoadingComponent>
         ),
       },
+      {
+        path: ROUTER.GIO_HANG,
+        element: (
+          <LazyLoadingComponent>
+            <Cart />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.LICH_SU_DON_HANG,
+        element: (
+          <LazyLoadingComponent>
+            <OrderHistory />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.THONG_TIN_CA_NHAN,
+        element: (
+          <LazyLoadingComponent>
+            <Profile />
+          </LazyLoadingComponent>
+        ),
+      },
+      {
+        path: ROUTER.YEU_THICH,
+        element: (
+          <LazyLoadingComponent>
+            <Favorites />
+          </LazyLoadingComponent>
+        ),
+      },
     ],
   },
   // Seller routes
   {
-    // path: "/seller",
     element: (
       <LazyLoadingComponent>
         <SellerRoutes />

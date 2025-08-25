@@ -1,35 +1,25 @@
 const ROUTER = {
   DEFAULT: "/",
-  SVG_VIEWER: "/svg-viewer",
   HOME: "/",
   DANG_NHAP: "/dang-nhap",
   DANG_KY: "/dang-ky",
-  DOI_MAT_KHAU: "/doi-mat-khau",
-  CAP_NHAT_THONG_TIN: "/cap-nhat-thong-tin",
 
   // Product routes
   SAN_PHAM: "/san-pham",
   CHI_TIET_SAN_PHAM: "/san-pham/:id",
   TIM_KIEM: "/search",
 
-  // Shopping
+  // User routes
+
+  THONG_TIN_CA_NHAN: "/thong-tin-ca-nhan",
   GIO_HANG: "/gio-hang",
-  THANH_TOAN: "/thanh-toan",
   DON_HANG_CUA_TOI: "/don-hang-cua-toi",
   YEU_THICH: "/yeu-thich",
+  LICH_SU_DON_HANG: "/lich-su-don-hang",
 
   // Collections
-  NEW_ARRIVALS: "/new-arrivals",
   COLLECTIONS: "/collections",
-  SUMMER_COLLECTION: "/summer-collection",
-  WOMEN: "/women",
-  MEN: "/men",
-  ACCESSORIES: "/accessories",
   SALE: "/sale",
-
-  // User routes
-  PROFILE: "/profile",
-  ORDERS: "/orders",
 
   // Seller routes
   SELLER_DASHBOARD: "/seller/dashboard",
@@ -43,11 +33,9 @@ const ROUTER = {
   THEM_VOUCHER: "/seller/them-voucher",
   BAO_CAO: "/seller/bao-cao",
 
-  // Employee routes
   QUAN_LY_NHAN_VIEN: "/employee/quan-ly-nhan-vien",
   THEM_NHAN_VIEN: "/employee/them-nhan-vien",
 
-  // Admin routes
   ADMIN_DASHBOARD: "/admin/dashboard",
   QUAN_LY_NGUOI_DUNG: "/admin/quan-ly-nguoi-dung",
   QUAN_LY_SELLER: "/admin/quan-ly-seller",

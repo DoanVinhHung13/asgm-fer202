@@ -334,3 +334,69 @@
     font-size: 13px;
   }
 }
+
+/* Brand và Favourite Wrapper */
+.brand-favourite-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.product-brand {
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* Favourite Button với SVG */
+.favourite-btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.favourite-btn-icon:hover {
+  transform: scale(1.1);
+}
+
+.favourite-btn-icon:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.favourite-btn-icon svg {
+  transition: all 0.3s ease;
+}
+
+.favourite-btn-icon.favourite-active svg {
+  animation: heartBeat 0.3s ease;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
