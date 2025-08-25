@@ -103,6 +103,46 @@
       "note": "",
       "createdAt": "2024-01-16T14:20:00Z",
       "updatedAt": "2025-08-21T06:23:36.803Z"
+    },
+    {
+      "id": "a81b",
+      "customerId": 1,
+      "items": [
+        {
+          "id": "86ca",
+          "customerId": 1,
+          "productId": 6,
+          "variantId": 27,
+          "quantity": 1,
+          "addedAt": "2025-08-25T07:17:10.048Z",
+          "productName": "Áo hoodie unisex",
+          "productImage": "/img/ao_hoodie_1.avif",
+          "productPrice": 550000,
+          "variantColor": "Xám",
+          "variantSize": "M",
+          "variantSku": "AH001-GRAY-M"
+        },
+        {
+          "id": "3e1f",
+          "customerId": 1,
+          "productId": 10,
+          "variantId": 44,
+          "quantity": 1,
+          "addedAt": "2025-08-25T07:17:13.764Z",
+          "productName": "Váy nữ dự tiệc",
+          "productImage": "/img/vay_nu_1.avif",
+          "productPrice": 680000,
+          "variantColor": "Đen",
+          "variantSize": "S",
+          "variantSku": "VN001-BLACK-S"
+        }
+      ],
+      "recipientName": "Johnny",
+      "recipientPhone": "0948803382",
+      "shippingAddress": "Paris 23st",
+      "total": 1230000,
+      "status": "cancelled",
+      "createdAt": "2025-08-25T07:27:51.780Z"
     }
   ],
   "vouchers": [
@@ -157,18 +197,33 @@
       "variantSku": "ASM001-WHITE-S"
     },
     {
-      "id": "ce37",
+      "id": "bcbb",
       "customerId": 1,
-      "productId": 7,
-      "variantId": 32,
+      "productId": 5,
+      "variantId": 24,
+      "quantity": 2,
+      "addedAt": "2025-08-25T08:14:53.226Z",
+      "productName": "Túi xách nữ mini",
+      "productImage": "/img/tui_xach_mini_1.avif",
+      "productPrice": 280000,
+      "variantColor": "Đen",
+      "variantSize": "OneSize",
+      "variantSku": "TX001-BLACK-OS",
+      "updatedAt": "2025-08-25T08:17:39.261Z"
+    },
+    {
+      "id": "7920",
+      "customerId": 1,
+      "productId": 10,
+      "variantId": 44,
       "quantity": 1,
-      "addedAt": "2025-08-25T05:43:23.317Z",
-      "productName": "Quần short thể thao",
-      "productImage": "/img/quan_short_1.avif",
-      "productPrice": 180000,
+      "addedAt": "2025-08-25T08:17:59.998Z",
+      "productName": "Váy nữ dự tiệc",
+      "productImage": "/img/vay_nu_1.avif",
+      "productPrice": 680000,
       "variantColor": "Đen",
       "variantSize": "S",
-      "variantSku": "QS001-BLACK-S"
+      "variantSku": "VN001-BLACK-S"
     }
   ],
   "products": [
@@ -786,17 +841,6 @@
       "productPrice": 199000,
       "originalPrice": 250000,
       "brand": "Nike"
-    },
-    {
-      "id": "6332",
-      "customerId": 1,
-      "productId": 6,
-      "addedAt": "2025-08-25T05:58:31.103Z",
-      "productName": "Áo hoodie unisex",
-      "productImage": "/img/ao_hoodie_1.avif",
-      "productPrice": 550000,
-      "originalPrice": null,
-      "brand": "StyleHub"
     }
   ]
 }
