@@ -1,5 +1,5 @@
 const OrderHistory = () => {
-  return <div>OrderHistoryyyy</div>;
+  return <div>OrderHistyaaaa</div>;
 };
 
 export default OrderHistory;
