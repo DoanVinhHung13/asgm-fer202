@@ -22,7 +22,7 @@ const Login = () => {
       // Điều hướng theo role
       switch (result.user.role) {
         case "seller":
-          navigate(ROUTER.SELLER_DASHBOARD);
+          navigate(ROUTER.QUAN_LY_DON_HANG);
           break;
         case "admin":
           navigate(ROUTER.ADMIN_DASHBOARD);

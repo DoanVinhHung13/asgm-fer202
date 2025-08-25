@@ -29,12 +29,12 @@ const SellerRoutes = () => {
   }
 
   const menuItems = [
-    {
-      id: "dashboard",
-      label: "Dashboard",
-      icon: <BarChartOutlined />,
-      path: ROUTER.DASHBOARD,
-    },
+    // {
+    //   id: "dashboard",
+    //   label: "Dashboard",
+    //   icon: <BarChartOutlined />,
+    //   path: ROUTER.DASHBOARD,
+    // },
     {
       id: "orders",
       label: "Quản lý Đơn hàng",

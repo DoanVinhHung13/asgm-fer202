@@ -22,12 +22,12 @@ const SellerDashboard = () => {
   const [openMenu, setOpenMenu] = useState(false); // thêm state cho dropdown
 
   const menuItems = [
-    {
-      id: "dashboard",
-      label: "Dashboard",
-      icon: <BarChartOutlined />,
-      path: "/seller/dashboard",
-    },
+    // {
+    //   id: "dashboard",
+    //   label: "Dashboard",
+    //   icon: <BarChartOutlined />,
+    //   path: "/seller/dashboard",
+    // },
     {
       id: "orders",
       label: "Quản lý Đơn hàng",
