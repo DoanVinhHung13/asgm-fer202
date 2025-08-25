@@ -16,9 +16,9 @@
       "email": "customer@example.com",
       "password": "123456",
       "role": "customer",
-      "name": "Trần Thị B",
-      "phone": "0987654321",
-      "address": "456 Đường XYZ, Hà Nội",
+      "name": "Nguyễn Văn Customer",
+      "phone": "0988123456",
+      "address": "Hà Nội",
       "status": "active",
       "createdAt": "2024-01-01T00:00:00Z"
     },
@@ -143,36 +143,7 @@
   ],
   "cart": [
     {
-      "id": 1,
-      "customerId": 1,
-      "productId": 1,
-      "variantId": 1,
-      "quantity": 2,
-      "addedAt": "2024-01-17T09:00:00Z",
-      "updatedAt": "2024-01-17T10:30:00Z",
-      "productName": "Áo thun nam basic",
-      "productImage": "/img/ao_thun_1.avif",
-      "productPrice": 199000,
-      "variantColor": "Đỏ",
-      "variantSize": "M",
-      "variantSku": "AT001-RED-M"
-    },
-    {
-      "id": 2,
-      "customerId": 1,
-      "productId": 4,
-      "variantId": 18,
-      "quantity": 1,
-      "addedAt": "2024-01-17T11:00:00Z",
-      "productName": "Giày sneaker unisex",
-      "productImage": "/img/giay_sneaker_1.avif",
-      "productPrice": 890000,
-      "variantColor": "Trắng",
-      "variantSize": "38",
-      "variantSku": "GS001-WHITE-38"
-    },
-    {
-      "id": 3,
+      "id": "3",
       "customerId": 2,
       "productId": 3,
       "variantId": 13,
@@ -186,18 +157,18 @@
       "variantSku": "ASM001-WHITE-S"
     },
     {
-      "id": "9a2c",
+      "id": "ce37",
       "customerId": 1,
-      "productId": 6,
-      "variantId": 29,
+      "productId": 7,
+      "variantId": 32,
       "quantity": 1,
-      "addedAt": "2025-08-24T14:13:01.262Z",
-      "productName": "Áo hoodie unisex",
-      "productImage": "/img/ao_hoodie_1.avif",
-      "productPrice": 550000,
+      "addedAt": "2025-08-25T05:43:23.317Z",
+      "productName": "Quần short thể thao",
+      "productImage": "/img/quan_short_1.avif",
+      "productPrice": 180000,
       "variantColor": "Đen",
-      "variantSize": "M",
-      "variantSku": "AH001-BLACK-M"
+      "variantSize": "S",
+      "variantSku": "QS001-BLACK-S"
     }
   ],
   "products": [
@@ -773,29 +744,7 @@
   ],
   "favourites": [
     {
-      "id": 1,
-      "customerId": 1,
-      "productId": 1,
-      "addedAt": "2024-01-17T09:00:00Z",
-      "productName": "Áo thun nam basic",
-      "productImage": "/img/ao_thun_1.avif",
-      "productPrice": 199000,
-      "originalPrice": 250000,
-      "brand": "Nike"
-    },
-    {
-      "id": 2,
-      "customerId": 1,
-      "productId": 4,
-      "addedAt": "2024-01-17T10:00:00Z",
-      "productName": "Giày sneaker unisex",
-      "productImage": "/img/giay_sneaker_1.avif",
-      "productPrice": 890000,
-      "originalPrice": null,
-      "brand": "Converse"
-    },
-    {
-      "id": 3,
+      "id": "3",
       "customerId": 2,
       "productId": 3,
       "addedAt": "2024-01-17T11:00:00Z",
@@ -804,6 +753,50 @@
       "productPrice": 320000,
       "originalPrice": 400000,
       "brand": "Puma"
+    },
+    {
+      "id": "d03b",
+      "customerId": 1,
+      "productId": 5,
+      "addedAt": "2025-08-25T05:50:03.569Z",
+      "productName": "Túi xách nữ mini",
+      "productImage": "/img/tui_xach_mini_1.avif",
+      "productPrice": 280000,
+      "originalPrice": 350000,
+      "brand": "Vans"
+    },
+    {
+      "id": "b247",
+      "customerId": 1,
+      "productId": 7,
+      "addedAt": "2025-08-25T05:50:10.595Z",
+      "productName": "Quần short thể thao",
+      "productImage": "/img/quan_short_1.avif",
+      "productPrice": 180000,
+      "originalPrice": 220000,
+      "brand": "Nike"
+    },
+    {
+      "id": "1b19",
+      "customerId": 1,
+      "productId": 1,
+      "addedAt": "2025-08-25T05:58:28.653Z",
+      "productName": "Áo thun nam basic",
+      "productImage": "/img/ao_thun_1.avif",
+      "productPrice": 199000,
+      "originalPrice": 250000,
+      "brand": "Nike"
+    },
+    {
+      "id": "6332",
+      "customerId": 1,
+      "productId": 6,
+      "addedAt": "2025-08-25T05:58:31.103Z",
+      "productName": "Áo hoodie unisex",
+      "productImage": "/img/ao_hoodie_1.avif",
+      "productPrice": 550000,
+      "originalPrice": null,
+      "brand": "StyleHub"
     }
   ]
 }
